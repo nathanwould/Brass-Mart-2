@@ -12,28 +12,33 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
-  name     String @default("")
-  email    String @unique @default("")
-  password String
-  posts    Post[] @relation("Post_author")
+  id       String  @id @default(cuid())
+  name     String  @default("")
+  email    String  @unique @default("")
+  password String?
 }
 
-model Post {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  status      String?   @default("draft")
-  content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publishDate DateTime?
-  author      User?     @relation("Post_author", fields: [authorId], references: [id])
-  authorId    String?   @map("author")
-  tags        Tag[]     @relation("Post_tags")
-
-  @@index([authorId])
+model Product {
+  id             String        @id @default(cuid())
+  productType    String
+  name           String        @default("")
+  make           String        @default("")
+  model          String        @default("")
+  category       String
+  instrumentType String
+  instrumentKey  String        @default("")
+  boreSize       Float?
+  bellSize       Float?
+  description    String        @default("")
+  photos         ProductImage? @relation("Product_photos", fields: [photosId], references: [id])
+  photosId       String?       @unique @map("photos")
+  price          Int
+  status         String        @default("in-stock")
 }
 
-model Tag {
-  id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+model ProductImage {
+  id      String   @id @default(cuid())
+  image   String?
+  altText String   @default("")
+  product Product? @relation("Product_photos")
 }
