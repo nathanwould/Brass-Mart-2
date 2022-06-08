@@ -6,6 +6,20 @@ type User {
   name: String
   email: String
   password: PasswordState
+  cart(
+    where: CartItemWhereInput! = {}
+    orderBy: [CartItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [CartItem!]
+  cartCount(where: CartItemWhereInput! = {}): Int
+  orders(
+    where: OrderWhereInput! = {}
+    orderBy: [OrderOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Order!]
+  ordersCount(where: OrderWhereInput! = {}): Int
 }
 
 type PasswordState {
@@ -25,6 +39,8 @@ input UserWhereInput {
   name: StringFilter
   email: StringFilter
   password: PasswordFilter
+  cart: CartItemManyRelationFilter
+  orders: OrderManyRelationFilter
 }
 
 input IDFilter {
@@ -70,6 +86,18 @@ input PasswordFilter {
   isSet: Boolean!
 }
 
+input CartItemManyRelationFilter {
+  every: CartItemWhereInput
+  some: CartItemWhereInput
+  none: CartItemWhereInput
+}
+
+input OrderManyRelationFilter {
+  every: OrderWhereInput
+  some: OrderWhereInput
+  none: OrderWhereInput
+}
+
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -85,6 +113,22 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  cart: CartItemRelateToManyForUpdateInput
+  orders: OrderRelateToManyForUpdateInput
+}
+
+input CartItemRelateToManyForUpdateInput {
+  disconnect: [CartItemWhereUniqueInput!]
+  set: [CartItemWhereUniqueInput!]
+  create: [CartItemCreateInput!]
+  connect: [CartItemWhereUniqueInput!]
+}
+
+input OrderRelateToManyForUpdateInput {
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+  create: [OrderCreateInput!]
+  connect: [OrderWhereUniqueInput!]
 }
 
 input UserUpdateArgs {
@@ -96,6 +140,18 @@ input UserCreateInput {
   name: String
   email: String
   password: String
+  cart: CartItemRelateToManyForCreateInput
+  orders: OrderRelateToManyForCreateInput
+}
+
+input CartItemRelateToManyForCreateInput {
+  create: [CartItemCreateInput!]
+  connect: [CartItemWhereUniqueInput!]
+}
+
+input OrderRelateToManyForCreateInput {
+  create: [OrderCreateInput!]
+  connect: [OrderWhereUniqueInput!]
 }
 
 type Product {
@@ -110,7 +166,13 @@ type Product {
   boreSize: Float
   bellSize: Float
   description: String
-  photos: ProductImage
+  photos(
+    where: ProductImageWhereInput! = {}
+    orderBy: [ProductImageOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [ProductImage!]
+  photosCount(where: ProductImageWhereInput! = {}): Int
   price: Int
   status: String
 }
@@ -134,7 +196,7 @@ input ProductWhereInput {
   boreSize: FloatNullableFilter
   bellSize: FloatNullableFilter
   description: StringFilter
-  photos: ProductImageWhereInput
+  photos: ProductImageManyRelationFilter
   price: IntFilter
   status: StringFilter
 }
@@ -148,6 +210,12 @@ input FloatNullableFilter {
   gt: Float
   gte: Float
   not: FloatNullableFilter
+}
+
+input ProductImageManyRelationFilter {
+  every: ProductImageWhereInput
+  some: ProductImageWhereInput
+  none: ProductImageWhereInput
 }
 
 input IntFilter {
@@ -188,15 +256,16 @@ input ProductUpdateInput {
   boreSize: Float
   bellSize: Float
   description: String
-  photos: ProductImageRelateToOneForUpdateInput
+  photos: ProductImageRelateToManyForUpdateInput
   price: Int
   status: String
 }
 
-input ProductImageRelateToOneForUpdateInput {
-  create: ProductImageCreateInput
-  connect: ProductImageWhereUniqueInput
-  disconnect: Boolean
+input ProductImageRelateToManyForUpdateInput {
+  disconnect: [ProductImageWhereUniqueInput!]
+  set: [ProductImageWhereUniqueInput!]
+  create: [ProductImageCreateInput!]
+  connect: [ProductImageWhereUniqueInput!]
 }
 
 input ProductUpdateArgs {
@@ -215,14 +284,14 @@ input ProductCreateInput {
   boreSize: Float
   bellSize: Float
   description: String
-  photos: ProductImageRelateToOneForCreateInput
+  photos: ProductImageRelateToManyForCreateInput
   price: Int
   status: String
 }
 
-input ProductImageRelateToOneForCreateInput {
-  create: ProductImageCreateInput
-  connect: ProductImageWhereUniqueInput
+input ProductImageRelateToManyForCreateInput {
+  create: [ProductImageCreateInput!]
+  connect: [ProductImageWhereUniqueInput!]
 }
 
 type ProductImage {
@@ -332,6 +401,192 @@ input ProductRelateToOneForCreateInput {
   connect: ProductWhereUniqueInput
 }
 
+type CartItem {
+  id: ID!
+  quantity: Int
+  product: Product
+  user: User
+}
+
+input CartItemWhereUniqueInput {
+  id: ID
+}
+
+input CartItemWhereInput {
+  AND: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  NOT: [CartItemWhereInput!]
+  id: IDFilter
+  quantity: IntFilter
+  product: ProductWhereInput
+  user: UserWhereInput
+}
+
+input CartItemOrderByInput {
+  id: OrderDirection
+  quantity: OrderDirection
+}
+
+input CartItemUpdateInput {
+  quantity: Int
+  product: ProductRelateToOneForUpdateInput
+  user: UserRelateToOneForUpdateInput
+}
+
+input UserRelateToOneForUpdateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+}
+
+input CartItemUpdateArgs {
+  where: CartItemWhereUniqueInput!
+  data: CartItemUpdateInput!
+}
+
+input CartItemCreateInput {
+  quantity: Int
+  product: ProductRelateToOneForCreateInput
+  user: UserRelateToOneForCreateInput
+}
+
+input UserRelateToOneForCreateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+type Order {
+  id: ID!
+  total: Int
+  items(
+    where: OrderItemWhereInput! = {}
+    orderBy: [OrderItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [OrderItem!]
+  itemsCount(where: OrderItemWhereInput! = {}): Int
+  user: User
+  charge: String
+}
+
+input OrderWhereUniqueInput {
+  id: ID
+}
+
+input OrderWhereInput {
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  NOT: [OrderWhereInput!]
+  id: IDFilter
+  total: IntNullableFilter
+  items: OrderItemManyRelationFilter
+  user: UserWhereInput
+  charge: StringFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input OrderItemManyRelationFilter {
+  every: OrderItemWhereInput
+  some: OrderItemWhereInput
+  none: OrderItemWhereInput
+}
+
+input OrderOrderByInput {
+  id: OrderDirection
+  total: OrderDirection
+  charge: OrderDirection
+}
+
+input OrderUpdateInput {
+  total: Int
+  items: OrderItemRelateToManyForUpdateInput
+  user: UserRelateToOneForUpdateInput
+  charge: String
+}
+
+input OrderItemRelateToManyForUpdateInput {
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  create: [OrderItemCreateInput!]
+  connect: [OrderItemWhereUniqueInput!]
+}
+
+input OrderUpdateArgs {
+  where: OrderWhereUniqueInput!
+  data: OrderUpdateInput!
+}
+
+input OrderCreateInput {
+  total: Int
+  items: OrderItemRelateToManyForCreateInput
+  user: UserRelateToOneForCreateInput
+  charge: String
+}
+
+input OrderItemRelateToManyForCreateInput {
+  create: [OrderItemCreateInput!]
+  connect: [OrderItemWhereUniqueInput!]
+}
+
+type OrderItem {
+  id: ID!
+  product: Product
+  order: Order
+}
+
+input OrderItemWhereUniqueInput {
+  id: ID
+}
+
+input OrderItemWhereInput {
+  AND: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  NOT: [OrderItemWhereInput!]
+  id: IDFilter
+  product: ProductWhereInput
+  order: OrderWhereInput
+}
+
+input OrderItemOrderByInput {
+  id: OrderDirection
+}
+
+input OrderItemUpdateInput {
+  product: ProductRelateToOneForUpdateInput
+  order: OrderRelateToOneForUpdateInput
+}
+
+input OrderRelateToOneForUpdateInput {
+  create: OrderCreateInput
+  connect: OrderWhereUniqueInput
+  disconnect: Boolean
+}
+
+input OrderItemUpdateArgs {
+  where: OrderItemWhereUniqueInput!
+  data: OrderItemUpdateInput!
+}
+
+input OrderItemCreateInput {
+  product: ProductRelateToOneForCreateInput
+  order: OrderRelateToOneForCreateInput
+}
+
+input OrderRelateToOneForCreateInput {
+  create: OrderCreateInput
+  connect: OrderWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -365,6 +620,30 @@ type Mutation {
   updateProductImages(data: [ProductImageUpdateArgs!]!): [ProductImage]
   deleteProductImage(where: ProductImageWhereUniqueInput!): ProductImage
   deleteProductImages(where: [ProductImageWhereUniqueInput!]!): [ProductImage]
+  createCartItem(data: CartItemCreateInput!): CartItem
+  createCartItems(data: [CartItemCreateInput!]!): [CartItem]
+  updateCartItem(
+    where: CartItemWhereUniqueInput!
+    data: CartItemUpdateInput!
+  ): CartItem
+  updateCartItems(data: [CartItemUpdateArgs!]!): [CartItem]
+  deleteCartItem(where: CartItemWhereUniqueInput!): CartItem
+  deleteCartItems(where: [CartItemWhereUniqueInput!]!): [CartItem]
+  createOrder(data: OrderCreateInput!): Order
+  createOrders(data: [OrderCreateInput!]!): [Order]
+  updateOrder(where: OrderWhereUniqueInput!, data: OrderUpdateInput!): Order
+  updateOrders(data: [OrderUpdateArgs!]!): [Order]
+  deleteOrder(where: OrderWhereUniqueInput!): Order
+  deleteOrders(where: [OrderWhereUniqueInput!]!): [Order]
+  createOrderItem(data: OrderItemCreateInput!): OrderItem
+  createOrderItems(data: [OrderItemCreateInput!]!): [OrderItem]
+  updateOrderItem(
+    where: OrderItemWhereUniqueInput!
+    data: OrderItemUpdateInput!
+  ): OrderItem
+  updateOrderItems(data: [OrderItemUpdateArgs!]!): [OrderItem]
+  deleteOrderItem(where: OrderItemWhereUniqueInput!): OrderItem
+  deleteOrderItems(where: [OrderItemWhereUniqueInput!]!): [OrderItem]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -419,6 +698,30 @@ type Query {
   ): [ProductImage!]
   productImage(where: ProductImageWhereUniqueInput!): ProductImage
   productImagesCount(where: ProductImageWhereInput! = {}): Int
+  cartItems(
+    where: CartItemWhereInput! = {}
+    orderBy: [CartItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [CartItem!]
+  cartItem(where: CartItemWhereUniqueInput!): CartItem
+  cartItemsCount(where: CartItemWhereInput! = {}): Int
+  orders(
+    where: OrderWhereInput! = {}
+    orderBy: [OrderOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Order!]
+  order(where: OrderWhereUniqueInput!): Order
+  ordersCount(where: OrderWhereInput! = {}): Int
+  orderItems(
+    where: OrderItemWhereInput! = {}
+    orderBy: [OrderItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [OrderItem!]
+  orderItem(where: OrderItemWhereUniqueInput!): OrderItem
+  orderItemsCount(where: OrderItemWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

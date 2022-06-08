@@ -24,18 +24,18 @@ export const User = list({
       isIndexed: 'unique',
     }),
     password: password(),
-    // cart: relationship({
-    //   ref: 'CartItem.user',
-    //   many: true,
-    //   ui: {
-    //     createView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'read' },
-    //   },
-    // }),
-    // orders: relationship({
-    //   ref: 'Order.user',
-    //   many: true,
-    // }),
+    cart: relationship({
+      ref: 'CartItem.user',
+      many: true,
+      ui: {
+        createView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'read' },
+      },
+    }),
+    orders: relationship({
+      ref: 'Order.user',
+      many: true,
+    }),
     // role: relationship({
     //   ref: 'Role.assignedTo',
     //   access: {
