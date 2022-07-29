@@ -22,7 +22,7 @@ async function checkout({root, token, context}: Arguments) {
     // console.log(user)
     // 3. Calculate the total order price
   const cartItems = user?.cart?.filter((cartItem: any) => cartItem.product);
-  const productPhotos = cartItems.map((cartItem: any)=> cartItem.product.photos);
+  const productPhotos = cartItems.map((cartItem: any) => cartItem.product.photos);
   console.log(productPhotos.values);
     const amount = cartItems.reduce(function (tally: number, cartItem: any) {
       return tally + cartItem.quantity * cartItem.product?.price;

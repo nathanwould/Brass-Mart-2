@@ -1,5 +1,5 @@
 import { list } from "@keystone-6/core";
-import { integer, relationship, text } from "@keystone-6/core/fields";
+import { integer, relationship, text, timestamp } from "@keystone-6/core/fields";
 
 export const Order = list({
   fields: {
@@ -7,5 +7,15 @@ export const Order = list({
     items: relationship({ ref: 'OrderItem.order', many: true }),
     user: relationship({ ref: 'User.orders' }),
     charge: text(),
+    createdAt: timestamp({
+      defaultValue: {
+        kind: 'now',
+      },
+      ui: {
+        createView: {
+          fieldMode: 'hidden'
+        },
+      },
+    }),
   },
 });

@@ -15,7 +15,11 @@ export const ProductImage = list({
       cloudinary,
       label: 'Source',
     }),
-    altText: text(),
-    product: relationship({ ref: 'Product.photos' }),
+    altText: text({
+      validation: { isRequired: true }
+    }),
+    product: relationship({
+      ref: 'Product.photos',
+    }),
   },
 });
