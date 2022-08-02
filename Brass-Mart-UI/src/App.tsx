@@ -9,7 +9,7 @@ const theme = extendTheme();
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
     <Router />
+    {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
   </ChakraProvider>
 );

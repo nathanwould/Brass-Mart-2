@@ -5,7 +5,7 @@ import request from "../../API/request";
 const CURRENT_USER_QUERY = gql`
   query {
     authenticatedItem {
-      ... on User {
+      ...on User {
         id
         email
         name

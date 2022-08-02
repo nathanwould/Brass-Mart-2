@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { QueryClientProvider } from "react-query";
 import useClient from "./useClient";
 

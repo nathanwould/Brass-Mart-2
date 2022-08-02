@@ -108,6 +108,7 @@ export default function WithSubnavigation() {
   const { data } = useUser();
   const user = data?.authenticatedItem;
   const { isOpen, onToggle } = useDisclosure();
+  console.log(user)
 
   return (
     <Box>
