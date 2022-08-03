@@ -9,7 +9,7 @@ import {
   Collapse,
   Link
 } from "@chakra-ui/react";
-import { NavItem, NAV_ITEMS, SIGNED_IN_NAV_ITEMS } from "./NavItems";
+import { NavItem, NAV_ITEMS, MOBILE_ONLY_NAV_ITEMS, SIGNED_IN_NAV_ITEMS } from "./NavItems";
 
 interface Props {
   user: any;
@@ -21,6 +21,9 @@ const MobileNav = ({user}: Props) => {
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
       display={{ md: 'none' }}>
+      {MOBILE_ONLY_NAV_ITEMS.map(navItem => (
+        <MobileNavItem key={navItem.label} {...navItem} />
+      ))}
       {NAV_ITEMS.map(navItem => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}

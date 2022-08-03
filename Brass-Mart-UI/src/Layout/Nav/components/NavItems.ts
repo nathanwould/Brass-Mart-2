@@ -27,6 +27,13 @@ export const NAV_ITEMS: Array<NavItem> = [
   },
 ];
 
+export const MOBILE_ONLY_NAV_ITEMS: Array<NavItem> = [
+  {
+    label: 'Home',
+    href: '/'
+  },
+];
+
 export const SIGNED_IN_NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Account',

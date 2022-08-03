@@ -35,20 +35,18 @@ const signInComposer = ({
   password
 }: SignInOptions) => () => request({
   document: SIGN_IN_MUTATION,
-  variables: {email, password}
+  variables: { email, password }
 });
 
 function useSignIn({
   email,
   password,
-}: SignInOptions) {
-  const navigate = useNavigate();
+}: SignInOptions,
+{...options}: any) {
   return useMutation({
     mutationKey: 'authenticateUserWithPassword',
     mutationFn: signInComposer({ email, password }),
-    onSuccess: () => {
-      navigate('/')
-    }
+    ...options,
   });
 }
 

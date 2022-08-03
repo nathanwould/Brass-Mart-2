@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
-import request from "../../API/request";
+import useRequest from "../../API/request";
 
 const CURRENT_USER_QUERY = gql`
   query {
@@ -34,13 +34,13 @@ const CURRENT_USER_QUERY = gql`
   }
 `;
 
-const getUserComposer = () => () => request({
+const getUserComposer = () => () => useRequest({
   document: CURRENT_USER_QUERY,
 });
 
 function useUser() {
   return useQuery({
-    queryKey: 'authenticatedItem',
+    queryKey: ['authenticatedItem'],
     queryFn: getUserComposer(),
   });
 }

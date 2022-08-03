@@ -100,16 +100,28 @@ import {
   CloseIcon,
 } from '@chakra-ui/icons';
 import useUser from '../../requests/queries/useUser';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import MobileNav from './components/MobileNav';
 import DesktopNav from './components/DesktopNav';
+import useSignOut from '../../requests/mutations/useSignOut';
+import { useEffect } from 'react';
 
 export default function WithSubnavigation() {
-  const { data } = useUser();
+  const { data, refetch } = useUser();
   const user = data?.authenticatedItem;
   const { isOpen, onToggle } = useDisclosure();
-  console.log(user)
+  const navigate = useNavigate();
 
+  const { data: sessionData, mutate: signOut, isLoading } = useSignOut({
+    onSuccess: () => {
+      navigate('/')
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [sessionData, refetch])
+  
   return (
     <Box>
       <Flex
@@ -185,17 +197,20 @@ export default function WithSubnavigation() {
               </Button>
             </> 
             : 
-              <Button
-                fontSize='sm'
-                fontWeight={600}
-                color='white'
-                bg='blue.400'
-                _hover={{
-                  bg: 'blue.300',
-              }}
-              >
-                Sign Out
-              </Button>
+            <Button
+              onClick={() => signOut()}
+              // isLoading={isLoading}
+              // loadingText="Signing out..."
+              fontSize='sm'
+              fontWeight={600}
+              color='white'
+              bg='blue.400'
+              _hover={{
+                bg: 'blue.300',
+            }}
+            >
+              Sign Out
+            </Button>
           }
           
         </Stack>

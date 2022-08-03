@@ -1,14 +1,15 @@
-import request, { RequestOptions } from "graphql-request";
+import { GraphQLClient, RequestOptions } from "graphql-request";
 
-const requestComposer = (opts: RequestOptions) => {
-  // const token = sessionStorage.getItem('keystonejs-session');
-  return request({
-    url: `${process.env.REACT_APP_API_BASE_URL}/api/graphql`,
+
+const useRequest = (opts: RequestOptions) => {
+  const endpoint = `${process.env.REACT_APP_API_BASE_URL}/api/graphql`;
+
+  const graphQLClient = new GraphQLClient(endpoint, {
+    credentials: 'include',
+  })
+  return graphQLClient.request({
     ...opts,
-    requestHeaders: {
-      authorization: `Bearer <token>`,
-    },
   });
 };
 
-export default requestComposer;
+export default useRequest;

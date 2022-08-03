@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
-import request from "../../API/request";
+import useRequest from "../../API/request";
 
 const ALL_PRODUCTS_QUERY = gql`
   query GetProducts(
@@ -45,7 +45,7 @@ interface UseProductsOptions {
 
 const getProductsComposer =
   (filter?: any, skip?: number, take?: number, orderBy?: any) =>
-    () => request({
+    () => useRequest({
   document: ALL_PRODUCTS_QUERY,
   variables: { filter, skip, take, orderBy }
 })

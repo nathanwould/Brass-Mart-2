@@ -3,18 +3,18 @@ import { password, relationship, text } from "@keystone-6/core/fields";
 import { permissions } from "../access";
 
 export const User = list({
-  access: {
-    operation: {
-      query: ({ session, context }) => true,
-      create: ({ session, context }) => true,
-      update: args => permissions.canManageUsers(args),
-      delete: args => permissions.canManageUsers(args),
-    },
-  },
-  ui: {
-    hideCreate: args => !permissions.canManageUsers(args),
-    hideDelete: args => !permissions.canManageUsers(args),
-  },
+  // access: {
+  //   operation: {
+  //     query: ({ session, context }) => true,
+  //     create: ({ session, context }) => true,
+  //     update: args => permissions.canManageUsers(args),
+  //     delete: args => permissions.canManageUsers(args),
+  //   },
+  // },
+  // ui: {
+  //   hideCreate: args => !permissions.canManageUsers(args),
+  //   hideDelete: args => !permissions.canManageUsers(args),
+  // },
   fields: {
     name: text({
       validation: { isRequired: true, }

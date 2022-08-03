@@ -21,7 +21,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: [frontEndURL],
+        origin: frontEndURL,
         credentials: true,
       },
     },
@@ -29,6 +29,13 @@ export default withAuth(
     db: {
       provider: 'sqlite',
       url: 'file:./keystone.db',
+      onConnect: async context => {
+        console.log(`Session secret: ${process.env.FRONTEND_URL}`);
+        // console.log(context);
+        // if (process.argv.includes('--seed-data')) {
+        //   await insertSeedData(keystone);
+        // }
+      },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {

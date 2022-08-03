@@ -1,8 +1,8 @@
 import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, Stack } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import useSignIn from '../../../requests/mutations/useSignIn';
+import useUser from '../../../requests/queries/useUser';
 
 type Props = {}
 
@@ -10,16 +10,23 @@ function SignInForm({ }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { mutate: signIn, data, isLoading, error } = useSignIn({email, password });
-  // const { mutate: signIn, data, isLoading, error } = useMutation({
-  //   onSuccess: () => {
-  //     navigate('/')
-  //   },
-  // });
+  const { data: sessionData, refetch } = useUser();
+
+  const { mutate: signIn, isLoading, error } = useSignIn(
+    { email, password },
+    {
+      onSuccess: () => {
+        navigate('/');
+        refetch();
+      },
+    },
+  );
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     signIn();
   };
+
   return (
     <Box
       minW={{ base: 'lg', md: 'md'}}
@@ -37,26 +44,32 @@ function SignInForm({ }: Props) {
             <Stack spacing={4}>
               <FormControl isRequired={true}>
                 <FormLabel>Email</FormLabel>
-              <Input
-                type='email'
-                placeholder='Your email...'
-                name='email'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
+                <Input
+                  type='email'
+                  placeholder='Your email...'
+                  name='email'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
               </FormControl>
               <FormControl isRequired={true}>
                 <FormLabel>Password</FormLabel>
-              <Input
-                type='password'
-                placeholder='Your password...'
-                name='password'
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
+                <Input
+                  type='password'
+                  placeholder='Your password...'
+                  name='password'
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
               </FormControl>
-              <Button type="submit">Sign In</Button>
+            <Button
+              type="submit"
+              isLoading={isLoading}
+              loadingText="Signing in..."
+            >
+              Sign In
+            </Button>
             </Stack>
         </form>
       </Stack>
