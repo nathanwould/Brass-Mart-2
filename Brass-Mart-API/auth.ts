@@ -12,19 +12,21 @@ import { createAuth } from '@keystone-6/auth';
 // See https://keystonejs.com/docs/apis/session#session-api for the session docs
 import { statelessSessions } from '@keystone-6/core/session';
 
-let sessionSecret = process.env.SESSION_SECRET;
+import 'dotenv/config';
+
+const sessionSecret = process.env.SESSION_SECRET;
 
 // Here is a best practice! It's fine to not have provided a session secret in dev,
 // however it should always be there in production.
-if (!sessionSecret) {
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error(
-      'The SESSION_SECRET environment variable must be set in production'
-    );
-  } else {
-    sessionSecret = '-- DEV COOKIE SECRET; CHANGE ME --';
-  }
-}
+// if (!sessionSecret) {
+//   if (process.env.NODE_ENV === 'production') {
+//     throw new Error(
+//       'The SESSION_SECRET environment variable must be set in production'
+//     );
+//   } else {
+//     sessionSecret = '-- DEV COOKIE SECRET; CHANGE ME --';
+//   }
+// }
 
 // Here we define how auth relates to our schemas.
 // What we are saying here is that we want to use the list `User`, and to log in
@@ -32,7 +34,7 @@ if (!sessionSecret) {
 const { withAuth } = createAuth({
   listKey: 'User',
   identityField: 'email',
-  sessionData: 'name',
+  sessionData: 'id name email',
   secretField: 'password',
   initFirstItem: {
     // If there are no items in the database, keystone will ask you to create

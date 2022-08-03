@@ -1,5 +1,5 @@
 import { list } from "@keystone-6/core";
-import { float, integer, relationship, select, text } from "@keystone-6/core/fields";
+import { float, integer, relationship, select, text, timestamp } from "@keystone-6/core/fields";
 
 export const Product = list({
   fields: {
@@ -20,7 +20,7 @@ export const Product = list({
       validation: { isRequired: true },
     }),
     model: text({
-      // lol I don't know if this is going to work
+      // lol this doesn't work, Keystone doesn't support conditional fields like this yet
       validation: { isRequired: !!{ productType: 'instrument' } }
     }),
     category: select({
@@ -89,6 +89,19 @@ export const Product = list({
       defaultValue: 'in-stock',
       ui: {
         displayMode: 'segmented-control',
+      },
+    }),
+    createdAt: timestamp({
+      defaultValue: {
+        kind: 'now',
+      },
+      db: {
+        updatedAt: true,
+      },
+      ui: {
+        createView: {
+          fieldMode: 'hidden'
+        },
       },
     }),
   },
