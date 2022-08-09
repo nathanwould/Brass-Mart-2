@@ -10,7 +10,7 @@ function Feature() {
       >
         <FeatureItem
           title="Buy"
-          description="Buy vintage and used trombones and other brass instruments"
+          description="Buy vintage and used trombones and other brass instruments."
           background="https://i.imgur.com/U2qus4Tl.jpg"
         >
           <FaShoppingBag />

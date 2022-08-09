@@ -32,6 +32,7 @@ function FeatureItem({children, title, description, background}: Props) {
         backgroundColor="white"
         opacity={"80%"}
         p={2}
+        // maxW={{sm: 80}}
       >
         <Text
           fontWeight={800}

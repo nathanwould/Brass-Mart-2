@@ -1,15 +1,21 @@
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import { useState } from 'react';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
 
 type Props = {}
 
 function Instruments({ }: Props) {
+  const [filter, setFilter] = useState({ productType: { equals: 'instrument' } });
+  const [take, setTake] = useState(8);
+  const [skip, setSkip] = useState(0);
+  const [orderBy, setOrderBy] = useState({ createdAt: 'desc' })
+  
   const { data, isLoading, error } = useProducts({
-    filter: { productType: { equals: 'instrument'} },
-    take: 8,
-    skip: 0,
-    orderBy: { createdAt: 'desc'}
+    filter,
+    take,
+    skip,
+    orderBy,
   });
   const products = data?.products;
   return (
@@ -23,7 +29,17 @@ function Instruments({ }: Props) {
         </BreadcrumbItem>
       </Breadcrumb>
       <Heading>Instruments</Heading>
-      <Products products={products} />
+      <Products
+        products={products}
+        filter={filter}
+        setFilter={setFilter}
+        take={take}
+        setTake={setTake}
+        skip={skip}
+        setSkip={setSkip}
+        orderBy={orderBy}
+        setOrderBy={setOrderBy}
+      />
     </Stack>
   );
 }

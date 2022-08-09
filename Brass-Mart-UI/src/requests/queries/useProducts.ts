@@ -5,14 +5,14 @@ import useRequest from "../../API/request";
 const ALL_PRODUCTS_QUERY = gql`
   query GetProducts(
     $filter: ProductWhereInput!
-    # $skip: Int!
-    # $take: Int!
+    $skip: Int!
+    $take: Int!
     $orderBy: [ProductOrderByInput!]
     ) {
     products(
       where: $filter
-      # skip: $skip
-      # take: $take
+      skip: $skip
+      take: $take
       orderBy: $orderBy
       ) {
       id

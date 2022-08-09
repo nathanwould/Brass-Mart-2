@@ -16,7 +16,10 @@ function Layout({children}: Props) {
       <Nav />
       <Box
         height={'10rem'}
-        backgroundImage={`url("https://res.cloudinary.com/dkyy9wjvs/image/upload/v1637184051/dsc_0383_brtvxm.jpg")`} />
+        backgroundImage={`url("https://res.cloudinary.com/dkyy9wjvs/image/upload/v1637184051/dsc_0383_brtvxm.jpg")`}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+      />
       <Box>{children}</Box>
       <Footer />
     </Flex>
