@@ -28,18 +28,19 @@ function Carousel({ products }: Props) {
       spacing={4}
       py={8}
     >
-      <Heading size="md">Recent Products:</Heading>
+      <Box textAlign="center">
+      <Heading size="lg">NEW ARRIVALS</Heading>
+      <Text m={2}>Grab them before they're gone!</Text>
+      </Box>
       <Container
         px={0}
         position="relative"
         display="flex"
-        // justifyContent="center"
-        // alignItems="center"
         maxW={{
-          base: "60%",
+          base: "50%",
           sm: "60%",
-          md: "60%",
-          lg: "36rem",
+          md: "50%",
+          lg: "30rem",
         }}
       >
         <ChevronLeftIcon
@@ -85,7 +86,7 @@ function Carousel({ products }: Props) {
         {products.map((product, index) => {
           const image = product.photos[0].image.publicUrlTransformed;
           return (
-            <Fade in={index === current}>
+            <Fade in={index === current} key={index}>
               <VStack
                 shadow="md"
                 display={index === current ? undefined : "none"}
@@ -97,14 +98,15 @@ function Carousel({ products }: Props) {
                   src={image}
                   alt={product.name}
                 />
-                <Text fontWeight="bold">{product.name}</Text>
+                <Text fontWeight="bold" fontSize="xl">{product.name}</Text>
                 <Text fontWeight="bold">{formatMoney(product.price)}</Text>
-                <Button>See More</Button>
+                <Button>Learn More</Button>
               </VStack>
             </Fade>
           )
         })}
-        </Container>
+      </Container>
+      <Button color="white" backgroundColor="blue.400">View All</Button>
     </VStack>
   );
 }

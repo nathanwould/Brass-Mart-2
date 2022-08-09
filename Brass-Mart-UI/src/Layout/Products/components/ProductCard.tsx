@@ -14,9 +14,10 @@ function ProductCard({ title, photo, price }: Props) {
     <Box
       shadow="md"
       overflow="hidden"
-      transition="all .2s"
+      transition="all .1s"
       _hover={{
-        shadow: "lg"
+        shadow: "lg",
+        transform: "scale(1.01)"
       }}
     >
       <Box
@@ -27,10 +28,6 @@ function ProductCard({ title, photo, price }: Props) {
           src={photo?.image.publicUrlTransformed}
           alt={photo.alt}
           objectFit="cover"
-          transition="transform .3s ease"
-          _hover={{
-            transform: "scale(1.05)"
-          }}
         />
       </Box>
       <VStack p={4} spacing="3" align="left">

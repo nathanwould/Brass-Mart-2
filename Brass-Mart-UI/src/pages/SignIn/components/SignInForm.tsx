@@ -1,4 +1,4 @@
-import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, Stack } from '@chakra-ui/react'
+import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSignIn from '../../../requests/mutations/useSignIn';
@@ -9,21 +9,28 @@ type Props = {}
 function SignInForm({ }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { data: sessionData, refetch } = useUser();
 
-  const { mutate: signIn, isLoading, error } = useSignIn(
+  const { mutate: signIn, data, isLoading } = useSignIn(
     { email, password },
     {
-      onSuccess: () => {
-        navigate('/');
-        refetch();
+      onSuccess: (data: any) => {
+        if (data.authenticateUserWithPassword.item) {
+          navigate('/');
+          refetch();
+        }
+        if (data.authenticateUserWithPassword.message) {
+          setError(data.authenticateUserWithPassword.message)
+        }
       },
     },
   );
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setError(null);
     signIn();
   };
 
@@ -62,7 +69,8 @@ function SignInForm({ }: Props) {
                   onChange={e => setPassword(e.target.value)}
                 />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
-              </FormControl>
+            </FormControl>
+            {error && <Text color="red">Login failed - please try again.</Text>}
             <Button
               type="submit"
               isLoading={isLoading}
