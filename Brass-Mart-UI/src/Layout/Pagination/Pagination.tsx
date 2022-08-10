@@ -17,39 +17,33 @@ function Pagination({
 }: Props) {
   const { data, error, isLoading } = usePagination();
   const count = data?.productsCount;
-  const pageCount = Math.ceil(count / take)
-  console.log(data)
+  const pageCount = Math.ceil(count / take);
   return (
-    <>
-      <head>
-        <title>Brass Mart - Page {page} of ___</title>
-      </head>
-      <HStack
-        spacing={4}
-        alignItems="center"
+    <HStack
+      spacing={4}
+      alignItems="center"
+    >
+      <Button
+        onClick={() => {
+          setPage(page - 1)
+          setSkip((prevState: any) => prevState - take)
+        }}
+        disabled={page === 1}
       >
-        <Button
-          onClick={() => {
-            setPage(page - 1)
-            setSkip((prevState: any) => prevState - take)
-          }}
-          disabled={page === 1}
-        >
-          Prev
-        </Button>
-        <Text>Page {page} of {pageCount}</Text>
-        <Text>{count} Items Total</Text>
-        <Button
-          onClick={() => {
-            setPage(page + 1)
-            setSkip((prevState: any) => prevState + take)
-          }}
-          disabled={count < take * page}
-        >
-          Next
-        </Button>
-      </HStack>
-    </>
+        Prev
+      </Button>
+      <Text>Page {page} of {pageCount}</Text>
+      <Text>{count} Items Total</Text>
+      <Button
+        onClick={() => {
+          setPage(page + 1)
+          setSkip((prevState: any) => prevState + take)
+        }}
+        disabled={count < take * page}
+      >
+        Next
+      </Button>
+    </HStack>
   );
 }
 

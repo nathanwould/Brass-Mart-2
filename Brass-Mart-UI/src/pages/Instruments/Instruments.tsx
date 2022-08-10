@@ -22,7 +22,12 @@ function Instruments({ }: Props) {
     <Stack m={6} spacing={6}>
       <Breadcrumb>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+          <BreadcrumbLink
+            href='/'
+            color="gray.600"
+          >
+            Home
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink href='/instruments'>Instruments</BreadcrumbLink>

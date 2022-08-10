@@ -9,7 +9,6 @@ type Props = {
 }
 
 function ProductCard({ title, photo, price }: Props) {
-  console.log(photo)
   return (
     <Box
       shadow="md"

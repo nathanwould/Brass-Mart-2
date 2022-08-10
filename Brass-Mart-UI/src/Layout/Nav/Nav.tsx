@@ -20,11 +20,15 @@ import MobileNav from './components/MobileNav';
 import DesktopNav from './components/DesktopNav';
 import useSignOut from '../../requests/mutations/useSignOut';
 import { useEffect } from 'react';
+import Cart from '../Cart/Cart';
 
 export default function WithSubnavigation() {
   const { data, refetch } = useUser();
   const user = data?.authenticatedItem;
+  // mobile nav open/close methods
   const { isOpen, onToggle } = useDisclosure();
+  // cart open/clsoe methods
+  const { onOpen, isOpen: cartIsOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
   const { data: sessionData, mutate: signOut, isLoading } = useSignOut({
@@ -112,20 +116,34 @@ export default function WithSubnavigation() {
               </Button>
             </> 
             : 
-            <Button
-              onClick={() => signOut()}
-              // isLoading={isLoading}
-              // loadingText="Signing out..."
-              fontSize='sm'
-              fontWeight={600}
-              color='white'
-              bg='blue.400'
-              _hover={{
-                bg: 'blue.300',
-            }}
-            >
-              Sign Out
-            </Button>
+            <>
+              <Button
+                onClick={() => signOut()}
+                // isLoading={isLoading}
+                // loadingText="Signing out..."
+                as='a'
+                fontSize='sm'
+                color="blue.400"
+                variant='link'
+              >
+                Sign Out
+              </Button>
+              <Button
+                onClick={onOpen}
+                as='a'
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize='sm'
+                fontWeight={600}
+                color='white'
+                bg='blue.400'
+                _hover={{
+                  bg: 'blue.300',
+                }}
+              >
+                Cart
+                <Text marginLeft="1 em">{user.cartCount}</Text>
+              </Button>
+            </>
           }
           
         </Stack>
@@ -134,6 +152,12 @@ export default function WithSubnavigation() {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav user={user} />
       </Collapse>
+
+      <Cart
+        user={user}
+        isOpen={cartIsOpen}
+        onClose={onClose}
+      />
     </Box>
   );
 }
