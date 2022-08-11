@@ -22,6 +22,7 @@ function Pagination({
     <HStack
       spacing={4}
       alignItems="center"
+      justifyContent="center"
     >
       <Button
         onClick={() => {

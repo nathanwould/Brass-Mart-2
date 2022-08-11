@@ -13,7 +13,7 @@ interface UsePaginationOptions {
 };
 
 const getPaginationComposer =
-  (/*filter?: any*/) =>
+  (/*{filter}: UsePaginationOptions*/) =>
     () => useRequest({
   document: PAGINATION_QUERY,
   // variables: { filter }

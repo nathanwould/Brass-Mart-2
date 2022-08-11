@@ -5,8 +5,8 @@ import { permissions } from "../access";
 export const CartItem = list({
   ui: {
     // hide the back end UI from regular users
-    hideCreate: args => !permissions.canManageUsers(args),
-    hideDelete: args => !permissions.canManageUsers(args),
+    // hideCreate: args => !permissions.canManageUsers(args),
+    // hideDelete: args => !permissions.canManageUsers(args),
     listView: {
       initialColumns: ['product', 'quantity', 'user']
     },

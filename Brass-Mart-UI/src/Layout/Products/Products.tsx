@@ -30,11 +30,12 @@ function Products({
   return (
     <>
       <Wrap spacing={6} p={6}>
-        {products && products.map((product: any, index: number) => {
-          const { name, photos, price } = product;
+        {products && products.map((product: any) => {
+          const { id, name, photos, price } = product;
           return (
             <ProductCard
-              key={index}
+              key={id}
+              id={id}
               title={name}
               photo={photos[0]}
               price={price}

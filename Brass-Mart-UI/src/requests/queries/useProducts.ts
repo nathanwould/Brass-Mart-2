@@ -44,11 +44,11 @@ interface UseProductsOptions {
 };
 
 const getProductsComposer =
-  (filter?: any, skip?: number, take?: number, orderBy?: any) =>
+  ({filter, skip, take, orderBy}: UseProductsOptions) =>
     () => useRequest({
-  document: ALL_PRODUCTS_QUERY,
-  variables: { filter, skip, take, orderBy }
-})
+      document: ALL_PRODUCTS_QUERY,
+      variables: { filter, skip, take, orderBy }
+    });
 
 function useProducts({
   filter,
@@ -59,9 +59,9 @@ function useProducts({
 }: UseProductsOptions) {
   return useQuery({
     queryKey: ['products', filter, skip, take, orderBy],
-    queryFn: getProductsComposer(filter, skip, take, orderBy),
+    queryFn: getProductsComposer({filter, skip, take, orderBy}),
     ...options,
   });
-}
+};
 
 export default useProducts;

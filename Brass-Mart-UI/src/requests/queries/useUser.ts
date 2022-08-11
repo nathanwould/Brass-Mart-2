@@ -43,6 +43,6 @@ function useUser() {
     queryKey: ['authenticatedItem'],
     queryFn: getUserComposer(),
   });
-}
+};
 
 export default useUser;

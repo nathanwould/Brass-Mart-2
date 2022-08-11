@@ -121,7 +121,7 @@ export default function WithSubnavigation() {
                 onClick={() => signOut()}
                 // isLoading={isLoading}
                 // loadingText="Signing out..."
-                as='a'
+                cursor="pointer"
                 fontSize='sm'
                 color="blue.400"
                 variant='link'
@@ -130,8 +130,6 @@ export default function WithSubnavigation() {
               </Button>
               <Button
                 onClick={onOpen}
-                as='a'
-                display={{ base: 'none', md: 'inline-flex' }}
                 fontSize='sm'
                 fontWeight={600}
                 color='white'
@@ -141,7 +139,7 @@ export default function WithSubnavigation() {
                 }}
               >
                 Cart
-                <Text marginLeft="1 em">{user.cartCount}</Text>
+                <Text marginLeft=".5em">{user?.cartCount}</Text>
               </Button>
             </>
           }
@@ -155,6 +153,7 @@ export default function WithSubnavigation() {
 
       <Cart
         user={user}
+        refetch={refetch}
         isOpen={cartIsOpen}
         onClose={onClose}
       />
