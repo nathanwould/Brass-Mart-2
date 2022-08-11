@@ -25,7 +25,6 @@ import Cart from '../Cart/Cart';
 export default function WithSubnavigation() {
   const { data, refetch } = useUser();
   const user = data?.authenticatedItem;
-
   // mobile nav open/close methods
   const { isOpen, onToggle } = useDisclosure();
   // cart open/clsoe methods

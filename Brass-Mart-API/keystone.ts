@@ -17,8 +17,6 @@ import { extendGraphqlSchema } from './extendedSchema';
 
 const frontEndURL = process.env.FRONTEND_URL || "http://localhost:7777";
 
-const frontEndURL = process.env.FRONTEND_URL || "http://localhost:7777";
-
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
   config({
