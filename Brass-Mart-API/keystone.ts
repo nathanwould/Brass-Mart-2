@@ -13,6 +13,9 @@ import { lists } from './schema';
 
 // Keystone auth is configured separately - check out the basic auth setup we are importing from our auth file.
 import { withAuth, session } from './auth';
+import { extendGraphqlSchema } from './extendedSchema';
+
+const frontEndURL = process.env.FRONTEND_URL || "http://localhost:7777";
 
 const frontEndURL = process.env.FRONTEND_URL || "http://localhost:7777";
 
@@ -43,6 +46,7 @@ export default withAuth(
       isAccessAllowed: (context) => true /*!!context.session?.data*/,
     },
     lists,
+    extendGraphqlSchema,
     session,
   })
 );

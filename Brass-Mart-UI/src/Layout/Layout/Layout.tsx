@@ -1,5 +1,6 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React from 'react'
+import Footer from '../Footer/Footer';
 import Nav from '../Nav/Nav'
 
 interface Props {
@@ -8,14 +9,20 @@ interface Props {
 
 function Layout({children}: Props) {
   return (
-    <Box>
+    <Flex
+      direction="column"
+      minH="100vh"
+    >
       <Nav />
       <Box
         height={'10rem'}
-        backgroundImage={`url("https://res.cloudinary.com/dkyy9wjvs/image/upload/v1637184051/dsc_0383_brtvxm.jpg")`} />
+        backgroundImage={`url("https://res.cloudinary.com/dkyy9wjvs/image/upload/v1637184051/dsc_0383_brtvxm.jpg")`}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+      />
       <Box>{children}</Box>
-      {/* Footer will go here */}
-    </Box>
+      <Footer />
+    </Flex>
   )
 }
 

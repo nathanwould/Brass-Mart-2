@@ -1,6 +1,5 @@
 import { gql } from "graphql-request";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, UseMutationOptions } from "react-query";
 import request from "../../API/request";
 
 export const SIGN_IN_MUTATION = gql`
@@ -28,7 +27,7 @@ export const SIGN_IN_MUTATION = gql`
 interface SignInOptions {
   email: string;
   password: string;
-}
+};
 
 const signInComposer = ({
   email,
@@ -42,7 +41,7 @@ function useSignIn({
   email,
   password,
 }: SignInOptions,
-{...options}: any) {
+  options?: UseMutationOptions) {
   return useMutation({
     mutationKey: 'authenticateUserWithPassword',
     mutationFn: signInComposer({ email, password }),

@@ -1,88 +1,3 @@
-// import { ChevronDownIcon } from '@chakra-ui/icons';
-// import { Flex, Text, Popover, PopoverContent, PopoverTrigger, Spacer, Stack, PopoverBody, Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure } from '@chakra-ui/react';
-// import useUser from '../../requests/queries/useUser'
-// import Logo from './components/Logo';
-// import NavItem from './components/NavItem';
-
-// function Nav() {
-//   const { data } = useUser();
-//   const user = data?.authenticatedItem;
-//   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-//   console.log('User:', user)
-//   return (
-//     <Flex
-//       pb={{ base: '6', sm: '8' }}
-//       pt={{ base: '3', sm: '5' }}
-//     >
-//       <Logo />
-//       <Stack
-//         align="end"
-//         justify="end"
-//         direction="row"
-//         spacing={4}
-//       >
-//         <Menu isOpen={isOpen}>
-//           <MenuButton
-//             as={Button}
-//             rightIcon={<ChevronDownIcon />}
-//             bg="transparent"
-//             onMouseEnter={onOpen}
-//             onMouseLeave={onClose}
-//             outline="none"
-//             fontSize='xl'
-//             marginLeft={6}
-//           >
-//             Shop
-//           </MenuButton>
-//           <MenuList
-//             onMouseEnter={onOpen}
-//             onMouseLeave={onClose}
-//           >
-//             <MenuItem>
-//               <NavItem
-//                 to='instruments'
-//                 text='Instruments'
-//                 subMenu={true}
-//               />
-//             </MenuItem>
-//             <MenuItem>
-//               <NavItem
-//                 to='accessories'
-//                 text='Accessories'
-//                 subMenu={true}
-//               />
-//             </MenuItem>
-//           </MenuList>
-//         </Menu>
-//         <NavItem
-//           to='about'
-//           text='About'
-//         />
-//         { user && (
-//         <>
-//           <NavItem
-//             to='account'
-//             text='Account'
-//           />
-//           <NavItem
-//             to='orders'
-//             text='Orders'
-//           />
-//           <NavItem
-//             to='cart'
-//             text='cartCount'
-//           />
-//         </>
-//         )}
-//       </Stack>
-//       <Spacer />
-//       {user ? <NavItem to='sign-out' text='Sign Out' /> : <NavItem to='sign-in' text='Sign In' />}
-//     </Flex>
-//   );
-// }
-
-// export default Nav
-
 import {
   Box,
   Flex,
@@ -105,11 +20,16 @@ import MobileNav from './components/MobileNav';
 import DesktopNav from './components/DesktopNav';
 import useSignOut from '../../requests/mutations/useSignOut';
 import { useEffect } from 'react';
+import Cart from '../Cart/Cart';
 
 export default function WithSubnavigation() {
   const { data, refetch } = useUser();
   const user = data?.authenticatedItem;
+
+  // mobile nav open/close methods
   const { isOpen, onToggle } = useDisclosure();
+  // cart open/clsoe methods
+  const { onOpen, isOpen: cartIsOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
   const { data: sessionData, mutate: signOut, isLoading } = useSignOut({
@@ -197,20 +117,32 @@ export default function WithSubnavigation() {
               </Button>
             </> 
             : 
-            <Button
-              onClick={() => signOut()}
-              // isLoading={isLoading}
-              // loadingText="Signing out..."
-              fontSize='sm'
-              fontWeight={600}
-              color='white'
-              bg='blue.400'
-              _hover={{
-                bg: 'blue.300',
-            }}
-            >
-              Sign Out
-            </Button>
+            <>
+              <Button
+                onClick={() => signOut()}
+                // isLoading={isLoading}
+                // loadingText="Signing out..."
+                cursor="pointer"
+                fontSize='sm'
+                color="blue.400"
+                variant='link'
+              >
+                Sign Out
+              </Button>
+              <Button
+                onClick={onOpen}
+                fontSize='sm'
+                fontWeight={600}
+                color='white'
+                bg='blue.400'
+                _hover={{
+                  bg: 'blue.300',
+                }}
+              >
+                Cart
+                <Text marginLeft=".5em">{user?.cartCount}</Text>
+              </Button>
+            </>
           }
           
         </Stack>
@@ -219,6 +151,13 @@ export default function WithSubnavigation() {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav user={user} />
       </Collapse>
+
+      <Cart
+        user={user}
+        refetch={refetch}
+        isOpen={cartIsOpen}
+        onClose={onClose}
+      />
     </Box>
   );
 }

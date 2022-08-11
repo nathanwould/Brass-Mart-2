@@ -18,6 +18,6 @@ function useSignOut({...options}) {
     mutationFn: signOutComposer(),
     ...options
   });
-}
+};
 
 export default useSignOut;
