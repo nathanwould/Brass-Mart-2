@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useSignIn from '../../../requests/mutations/useSignIn';
 import useUser from '../../../requests/queries/useUser';
 
-type Props = {}
-
-function SignInForm({ }: Props) {
+function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -70,7 +68,7 @@ function SignInForm({ }: Props) {
                 />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
             </FormControl>
-            {error && <Text color="red">Login failed - please try again.</Text>}
+            {error && <Text color="red">Login failed - please try</Text>}
             <Button
               type="submit"
               isLoading={isLoading}
