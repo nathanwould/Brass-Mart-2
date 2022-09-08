@@ -84,6 +84,7 @@ function Carousel({ products }: Props) {
           }}
         />
         {products.map((product, index) => {
+          const { id, name, price } = product;
           const image = product.photos[0].image.publicUrlTransformed;
           return (
             <Fade in={index === current} key={index}>
@@ -98,15 +99,25 @@ function Carousel({ products }: Props) {
                   src={image}
                   alt={product.name}
                 />
-                <Text fontWeight="bold" fontSize="xl">{product.name}</Text>
-                <Text fontWeight="bold">{formatMoney(product.price)}</Text>
-                <Button>Learn More</Button>
+                <Text fontWeight="bold" fontSize="xl">{name}</Text>
+                <Text fontWeight="bold">{formatMoney(price)}</Text>
+                <Button as="a" href={`products/${id}`}>Learn More</Button>
               </VStack>
             </Fade>
           )
         })}
       </Container>
-      <Button color="white" backgroundColor="blue.400">View All</Button>
+      <Button
+        as="a"
+        href="/instruments"
+        color="white"
+        backgroundColor="blue.400"
+        _hover={{
+          backgroundColor: "blue.300",
+        }}
+      >
+        Shop Instruments
+      </Button>
     </VStack>
   );
 }

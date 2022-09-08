@@ -4,7 +4,7 @@ import useRequest from "../../API/request";
 
 const PRODUCT_QUERY = gql`
   query GetProduct(
-    $id: String!
+    $id: ID!
     ) {
     product(
       where: 
@@ -17,8 +17,12 @@ const PRODUCT_QUERY = gql`
       name
       make
       model
+      instrumentKey
+      boreSize
+      bellSize
       description
       price
+      status
       photos {
         altText
         image {
@@ -30,7 +34,7 @@ const PRODUCT_QUERY = gql`
 `;
 
 interface UseProductOptions {
-  id: string;
+  id?: string;
 };
 
 const getProductComposer =

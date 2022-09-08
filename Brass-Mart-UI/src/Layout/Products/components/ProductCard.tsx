@@ -12,6 +12,8 @@ type Props = {
 function ProductCard({ id, title, photo, price }: Props) {
   return (
     <Box
+      as="a"
+      href={`/products/${id}`}
       shadow="md"
       overflow="hidden"
       transition="all .1s"
