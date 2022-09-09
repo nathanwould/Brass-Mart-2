@@ -1,4 +1,5 @@
 import {
+  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,7 +10,10 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import calcTotalPrice from '../../utils/calcTotalPrice';
+import { formatMoney } from '../../utils/formatMoney';
 import CartItem from './components/CartItem';
+import CheckoutButton from './components/CheckoutButton';
 
 interface Props {
   user: any;
@@ -35,11 +39,13 @@ function Cart({ user, isOpen, onClose }: Props) {
           <VStack spacing={2}>  
             {user?.cartCount > 0 ?
               user.cart.map((item: any) => {
+                console.log(item.id)
                 const { name, price } = item.product;
                 const photo = item.product.photos[0]?.image.publicUrlTransformed || null;
                 return (
                   <CartItem
                     key={item.id}
+                    id={item.id}
                     name={name}
                     price={price}
                     photo={photo}
@@ -51,7 +57,12 @@ function Cart({ user, isOpen, onClose }: Props) {
           </VStack>
         </DrawerBody>
         <DrawerFooter>
-          Total Price and Checkout
+          <VStack>
+            <Text fontWeight={800}>
+              Total: {formatMoney(calcTotalPrice(user?.cart))}
+            </Text>
+            <CheckoutButton />
+          </VStack>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

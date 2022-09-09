@@ -1,6 +1,6 @@
-import { Box, Heading, Text, Image, VStack } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, VStack, LinkOverlay } from '@chakra-ui/react';
 import { formatMoney } from '../../../utils/formatMoney';
-import AddToCartButton from '../../Cart/components/AddToCart';
+import AddToCartButton from '../../Cart/components/AddToCartButton';
 
 type Props = {
   id: string;
@@ -12,8 +12,6 @@ type Props = {
 function ProductCard({ id, title, photo, price }: Props) {
   return (
     <Box
-      as="a"
-      href={`/products/${id}`}
       shadow="md"
       overflow="hidden"
       transition="all .1s"
@@ -39,7 +37,7 @@ function ProductCard({ id, title, photo, price }: Props) {
       >
         <Heading fontSize="xl">{title}</Heading>
         <Text fontWeight="bold">{formatMoney(price)}</Text>
-        <AddToCartButton id={id} />
+        <AddToCartButton id={id}/>
       </VStack>
     </Box>
   );

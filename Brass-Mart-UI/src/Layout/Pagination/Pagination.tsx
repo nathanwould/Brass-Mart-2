@@ -34,7 +34,6 @@ function Pagination({
         Prev
       </Button>
       <Text>Page {page} of {pageCount}</Text>
-      <Text>{count} Items Total</Text>
       <Button
         onClick={() => {
           setPage(page + 1)

@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import useAddToCart from '../../../requests/mutations/useAddToCart';
 import useUser from '../../../requests/queries/useUser';
 
