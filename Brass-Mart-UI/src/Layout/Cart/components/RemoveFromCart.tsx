@@ -1,4 +1,5 @@
-import { Button } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
+import { IconButton } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import useRemoveFromCart from '../../../requests/mutations/useRemoveFromCart';
 import useUser from '../../../requests/queries/useUser';
@@ -16,16 +17,17 @@ function RemoveFromCart({ id }: Props) {
     refetch();
   }, [data, refetch]);
 return (
-  <Button
+  <IconButton
     isLoading={isLoading}
     onClick={() => removeFromCart()}
+    aria-label="remove item"
+    icon={<CloseIcon />}
+    colorScheme="red"
     p={0}
     h={6}
     minW={6}
-    fontSize={12}
-  >
-    &#10006;
-  </Button>
+    fontSize={10}
+  />
 );
 }
 

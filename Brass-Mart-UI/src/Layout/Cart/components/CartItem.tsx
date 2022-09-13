@@ -14,8 +14,10 @@ export default function CartItem({ id, photo, name, price }: Props) {
     <Stack
       direction={{ base: "row" }}
       maxW="100%"
+      minW="100%"
       justifyContent="space-between"
     >
+      
       <Image
         src={photo}
         alt={name}
@@ -23,11 +25,14 @@ export default function CartItem({ id, photo, name, price }: Props) {
         h={24}
         objectFit="cover"
       />
+
       <Stack p={2} justifyContent={"center"}>
         <Text>{name}</Text>
         <Text>{formatMoney(price)}</Text>
       </Stack>
+
       <RemoveFromCart id={id} />
+
     </Stack>
   );
 };

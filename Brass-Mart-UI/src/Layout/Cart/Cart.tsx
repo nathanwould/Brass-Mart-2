@@ -1,5 +1,5 @@
 import {
-  Button,
+  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -7,6 +7,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Grid,
+  GridItem,
+  SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -56,13 +59,34 @@ function Cart({ user, isOpen, onClose }: Props) {
             }
           </VStack>
         </DrawerBody>
-        <DrawerFooter>
-          <VStack>
-            <Text fontWeight={800}>
-              Total: {formatMoney(calcTotalPrice(user?.cart))}
-            </Text>
-            <CheckoutButton />
-          </VStack>
+        <DrawerFooter justifyContent="flex-start">
+          <Grid
+            w="100%"
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeat(2, 1fr)"
+            gap={4}
+          >
+            <GridItem rowSpan={1} colSpan={1}>
+              <Text>Subtotal:</Text>
+            </GridItem>
+            <GridItem rowSpan={1} colSpan={1}>
+              <Text>{formatMoney(calcTotalPrice(user?.cart))}</Text>
+            </GridItem>
+            <GridItem colSpan={2}>
+              <CheckoutButton />
+            </GridItem>
+          </Grid>
+          {/* <SimpleGrid columns={2} spacing={8}>
+            <Box>
+              <Text>Subtotal:</Text>
+            </Box>
+            <Box>
+              <Text>{formatMoney(calcTotalPrice(user?.cart))}</Text>
+            </Box>
+            <Box>
+              <CheckoutButton />
+            </Box>
+          </SimpleGrid> */}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
