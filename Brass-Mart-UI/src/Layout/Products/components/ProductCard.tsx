@@ -28,9 +28,10 @@ function ProductCard({ id, title, photo, price }: Props) {
         <Image
           src={photo?.image.publicUrlTransformed}
           alt={photo.alt}
-          // w="100%"
-          // h="12rem"
           objectFit="cover"
+          style={{
+            aspectRatio: "4 / 3"
+          }}
         />
       </Box>
       <Spacer />

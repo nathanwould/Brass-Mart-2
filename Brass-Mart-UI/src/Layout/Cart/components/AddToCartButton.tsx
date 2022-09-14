@@ -9,19 +9,37 @@ interface Props {
 
 function AddToCartButton({ id }: Props) {
   const { mutate: addToCart, data, isLoading, error } = useAddToCart({ id });
-  const { refetch } = useUser();
+  const { data: user, refetch } = useUser();
+  const added = !!user?.authenticatedItem.cart.find((cartItem: any) => cartItem.product.id === id)
 
   useEffect(() => {
     refetch();
   }, [data, refetch]);
-  
-  return (
-    <Button
-      onClick={() => addToCart()}
-    >
-      Add To Cart
-    </Button>
-  );
+  if (user) {
+    return (
+      <>
+        {added ?
+          <Button
+            disabled
+          >
+            Added To Cart
+          </Button>
+        : <Button
+          onClick={() => addToCart()}
+        >
+          Add To Cart
+        </Button>
+      }
+      </>
+    );
+  } else {
+    return (
+      <Button
+        as='a'
+        href="sign-in"
+      ></Button>
+    );
+  };
 };
 
 export default AddToCartButton;
