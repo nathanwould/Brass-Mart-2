@@ -1,5 +1,6 @@
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 import { useState } from 'react';
+import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
 
@@ -18,21 +19,21 @@ function Instruments({ }: Props) {
     orderBy,
   });
   const products = data?.products;
+
+  const breadcrumbItems = [
+    {
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "Instruments",
+      href: "/instruments",
+    },
+  ];
+
   return (
     <Stack m={6} spacing={6}>
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink
-            href='/'
-            color="gray.600"
-          >
-            Home
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink href='/instruments'>Instruments</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <BreadCrumbs items={breadcrumbItems} />
       <Heading>Instruments</Heading>
       <Products
         products={products}

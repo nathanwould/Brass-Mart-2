@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import Layout from "../Layout/Layout/Layout";
 import Instruments from "../pages/Instruments/Instruments";
 import SignIn from "../pages/SignIn/SignIn";
+import SingleProduct from "../pages/SingleProduct/SingleProduct";
 
 interface RouteProps {
   [x: string]: any,
@@ -35,6 +36,10 @@ function Router() {
               path="accessories"
               element={<Accessories />}
             /> */}
+            <Route
+              path="products/:id"
+              element={<SingleProduct />}
+            />
             <Route
               path="sign-in"
               element={<SignIn />}
