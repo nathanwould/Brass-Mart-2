@@ -1,4 +1,14 @@
-export interface IProduct {
+export type IUser = {
+  name: string;
+  email: string;
+  password: string;
+  cart: ICartItem[];
+  cartCount: number;
+  orders: IOrder[];
+};
+
+export type IProduct = {
+  id: string;
   productType: string;
   name: string;
   make: string;
@@ -9,18 +19,46 @@ export interface IProduct {
   boreSize?: number;
   bellSize?: number;
   description: string;
-  photos?: IProductImage[];
+  photos: IProductImage[];
   price: number;
   status: string;
   createdAt: string;
   updatedAt?: string;
 };
 
-export interface IProductImage {
+export type IProductImage = {
+  image: ICloudinaryImage;
+  altText: string;
+  product: IProduct;
+};
 
-}
+export type ICloudinaryImage = {
+  publicUrlTransformed: string;
+};
 
-export interface IBreadcrumbItem {
+export type ICartItem = {
+  id: string;
+  quantity: number;
+  product: IProduct;
+  user: IUser;
+};
+
+export type IOrder = {
+  id: string;
+  total: number;
+  items: IOrderItem[];
+  user: IUser;
+  charge: string;
+  createdAt: string;
+};
+
+export type IOrderItem = {
+  id: string;
+  product: IProduct;
+  order: IOrder;
+};
+
+export type IBreadcrumbItem = {
   name: string;
   href: string;
 };

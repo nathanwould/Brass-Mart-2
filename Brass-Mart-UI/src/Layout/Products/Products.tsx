@@ -1,10 +1,11 @@
 import { Wrap } from '@chakra-ui/react';
 import { useState } from 'react'
+import { IProduct } from '../../types';
 import Pagination from '../Pagination/Pagination';
 import ProductCard from './components/ProductCard';
 
 type Props = {
-  products: any;
+  products: IProduct[];
   filter: any;
   setFilter: (value: any) => void;
   skip: number;
@@ -30,7 +31,7 @@ function Products({
   return (
     <>
       <Wrap spacing={6} p={6}>
-        {products && products.map((product: any) => {
+        {products && products.map((product: IProduct) => {
           const { id, name, photos, price } = product;
           return (
             <ProductCard

@@ -13,13 +13,14 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { ICartItem, IUser } from '../../types';
 import calcTotalPrice from '../../utils/calcTotalPrice';
 import { formatMoney } from '../../utils/formatMoney';
 import CartItem from './components/CartItem';
 import CheckoutButton from './components/CheckoutButton';
 
 interface Props {
-  user: any;
+  user: IUser;
   refetch: () => void;
   isOpen: boolean;
   onClose: () => void;
@@ -41,10 +42,10 @@ function Cart({ user, isOpen, onClose }: Props) {
         <DrawerBody>
           <VStack spacing={2}>  
             {user?.cartCount > 0 ?
-              user.cart.map((item: any) => {
+              user.cart.map((item: ICartItem) => {
                 console.log(item.id)
                 const { name, price } = item.product;
-                const photo = item.product.photos[0]?.image.publicUrlTransformed || null;
+                const photo = item.product.photos[0]?.image.publicUrlTransformed;
                 return (
                   <CartItem
                     key={item.id}
@@ -70,23 +71,12 @@ function Cart({ user, isOpen, onClose }: Props) {
               <Text>Subtotal:</Text>
             </GridItem>
             <GridItem rowSpan={1} colSpan={1}>
-              <Text>{formatMoney(calcTotalPrice(user?.cart))}</Text>
+              <Text align="right">{formatMoney(calcTotalPrice(user?.cart))}</Text>
             </GridItem>
             <GridItem colSpan={2}>
               <CheckoutButton />
             </GridItem>
           </Grid>
-          {/* <SimpleGrid columns={2} spacing={8}>
-            <Box>
-              <Text>Subtotal:</Text>
-            </Box>
-            <Box>
-              <Text>{formatMoney(calcTotalPrice(user?.cart))}</Text>
-            </Box>
-            <Box>
-              <CheckoutButton />
-            </Box>
-          </SimpleGrid> */}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
+import { IProduct } from '../../types';
 
 type Props = {}
 
@@ -18,7 +19,7 @@ function Instruments({ }: Props) {
     skip,
     orderBy,
   });
-  const products = data?.products;
+  const products: IProduct[] = data?.products;
 
   const breadcrumbItems = [
     {

@@ -1,10 +1,11 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, Fade, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import { IProduct } from "../../types";
 import { formatMoney } from "../../utils/formatMoney";
 
 interface Props {
-  products: any;
+  products: IProduct[];
 };
 
 function Carousel({ products }: Props) {
