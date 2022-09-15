@@ -25,11 +25,12 @@ function AddToCartButton({ id }: Props) {
             Added To Cart
           </Button>
         : <Button
-          onClick={() => addToCart()}
-        >
-          Add To Cart
-        </Button>
-      }
+            onClick={() => addToCart()}
+            isLoading={isLoading}
+          >
+            Add To Cart
+          </Button>
+        }
       </>
     );
   } else {
@@ -37,7 +38,7 @@ function AddToCartButton({ id }: Props) {
       <Button
         as='a'
         href="sign-in"
-      ></Button>
+      >Add To Cart</Button>
     );
   };
 };
