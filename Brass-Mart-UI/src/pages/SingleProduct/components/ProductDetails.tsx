@@ -15,9 +15,7 @@ function ProductDetails({product}: Props) {
       backgroundColor="gray.200"
       borderRadius="md"
     >
-      <Flex
-        direction={{ base: "column", md: "row" }}
-      >
+      <Flex direction={{ base: "column", md: "row" }} >
         <ImageCarousel photos={product?.photos} />
         {product?.productType === "instrument" &&
           <InstrumentDetails product={product} />

@@ -1,8 +1,6 @@
 import { Box, Image } from "@chakra-ui/react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import { IProductImage } from '../../types'
+import { IProductImage } from '../../types';
 
 interface Props {
   photos: IProductImage[];
@@ -19,12 +17,13 @@ function ImageCarousel({ photos }: Props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: true,
+    swipeToSlide: true,
   };
 
   return (
     <Box
       maxW="40rem"
-      minW="18rem"
+      minW="16rem"
       p={8}
     >
       <Slider {...settings}>

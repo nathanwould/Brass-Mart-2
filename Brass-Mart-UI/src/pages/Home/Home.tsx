@@ -1,5 +1,5 @@
 import { Stack } from "@chakra-ui/react";
-import ImageCarousel from "../../Layout/Carousel/Carousel";
+import ProductCarousel from "../../Layout/Carousel/ProductCarousel";
 import useProducts from "../../requests/queries/useProducts";
 import Feature from "./components/Feature";
 
@@ -14,7 +14,7 @@ function Home({ }: Props) {
   });
   return (
     <Stack spacing={12}>
-      {isSuccess && <ImageCarousel products={data?.products} />}
+      {isSuccess && <ProductCarousel products={data?.products} />}
       <Feature />
     </Stack>
   )

@@ -1,39 +1,77 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, Fade, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import Slider from "react-slick";
 import { useState } from "react";
 import { IProduct } from "../../types";
 import { formatMoney } from "../../utils/formatMoney";
+import { LeftArrow, RightArrow } from "./components/Arrows";
 
 interface Props {
   products: IProduct[];
 };
 
-function Carousel({ products }: Props) {
+function ProductCarousel({ products }: Props) {
   const [current, setCurrent] = useState(0);
   const length = products?.length;
 
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
+  const settings = {
+    autoplay: true,
+    dots: true,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    autoplaySpeed: 6000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: true,
+    swipeToSlide: true,
+    nextArrow: <RightArrow />,
+    prevArrow: <LeftArrow />,
   };
-
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
-
-  if (!Array.isArray(products) || products.length <= 0) {
-    return null
-  }
 
   return (
     <VStack
       spacing={4}
-      py={8}
+      p={8}
     >
       <Box textAlign="center">
-      <Heading size="lg">NEW ARRIVALS</Heading>
-      <Text m={2}>Grab them before they're gone!</Text>
+        <Heading size="lg">NEW ARRIVALS</Heading>
+        <Text m={2}>Grab them before they're gone!</Text>
       </Box>
-      <Container
+      <Box
+        p={4}
+        paddingBottom={8}
+        maxW={{
+          base: "80%",
+          sm: "70%",
+          md: "50%",
+          lg: "30rem",
+        }}
+      >  
+        <Slider {...settings}>
+          {products?.map((product, index) => {
+            const { id, name, price } = product;
+            const image = product.photos[0].image.publicUrlTransformed;
+            return (
+              <VStack
+                shadow="md"
+                textAlign="center"
+                paddingBottom={4}
+                spacing={4}
+              >
+                <Image
+                  src={image}
+                  alt={product.name}
+                />
+                <Text fontWeight="bold" fontSize="xl">{name}</Text>
+                <Text fontWeight="bold">{formatMoney(price)}</Text>
+                <Button as="a" href={`products/${id}`}>Learn More</Button>
+              </VStack>
+            )
+          })}
+        </Slider>
+      </Box>
+      {/* <Container
         px={0}
         position="relative"
         display="flex"
@@ -107,12 +145,13 @@ function Carousel({ products }: Props) {
             </Fade>
           )
         })}
-      </Container>
+      </Container> */}
       <Button
         as="a"
         href="/instruments"
         color="white"
         backgroundColor="blue.400"
+        marginTop={"12rem"}
         _hover={{
           backgroundColor: "blue.300",
         }}
@@ -123,4 +162,4 @@ function Carousel({ products }: Props) {
   );
 }
 
-export default Carousel;
+export default ProductCarousel;

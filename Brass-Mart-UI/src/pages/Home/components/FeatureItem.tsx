@@ -15,7 +15,6 @@ function FeatureItem({children, title, description, background}: Props) {
       backgroundPosition="center"
       backgroundSize="cover"
       p={6}
-      // minW={100}
     >
       <Flex
         w={12}
@@ -32,17 +31,11 @@ function FeatureItem({children, title, description, background}: Props) {
         backgroundColor="white"
         opacity={"80%"}
         p={2}
-        // maxW={{sm: 80}}
       >
-        <Text
-          fontWeight={800}
-        >
+        <Text fontWeight={800}>
           {title}
         </Text>
-        <Text
-          color="gray.600"
-          fontWeight={600}
-        >
+        <Text color="gray.600" fontWeight={600}>
           {description}
         </Text>
       </Box>
