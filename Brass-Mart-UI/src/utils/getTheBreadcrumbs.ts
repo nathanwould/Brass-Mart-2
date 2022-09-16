@@ -25,7 +25,6 @@ export default function getTheBreadcrumbs(product: IProduct) {
       })
     };
     if (index === 2 && item !== breadCrumbs[index - 1]) {
-      console.log(item)
       breadCrumbItems.push({
         name: formatBreadcrumb(item || ''),
         href: `${breadCrumbItems[index - 1].href}/${formatBreadcrumb(item || '').toLowerCase()}s`
