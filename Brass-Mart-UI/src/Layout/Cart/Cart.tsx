@@ -1,5 +1,4 @@
 import {
-  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,7 +8,6 @@ import {
   DrawerOverlay,
   Grid,
   GridItem,
-  SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';

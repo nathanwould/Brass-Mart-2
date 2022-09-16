@@ -8,7 +8,7 @@ interface Props {
 };
 
 function InstrumentDetails({ product }: Props) {
-  const { id, make, model, boreSize, bellSize, description, price } = product;
+  const { id, make, model, boreSize, bellSize, price } = product;
   
   if (product) {
     return (
