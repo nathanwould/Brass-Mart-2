@@ -7,16 +7,17 @@ import Layout from "../Layout/Layout/Layout";
 import Instruments from "../pages/Instruments/Instruments";
 import SignIn from "../pages/SignIn/SignIn";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
+import Checkout from "../pages/Checkout/Checkout";
 
-interface RouteProps {
-  [x: string]: any,
-  component: ComponentType<object>;
-};
+// interface RouteProps {
+//   [x: string]: any,
+//   component: ComponentType<object>;
+// };
 
-interface Props {
-  [x: string]: any;
-  children: React.ReactNode
-};
+// interface Props {
+//   [x: string]: any;
+//   children: React.ReactNode
+// };
 
 function Router() {
   const [isScreen] = useMediaQuery('screen');
@@ -48,6 +49,10 @@ function Router() {
               path="sign-up"
               element={<SignUp />}
             /> */}
+            <Route
+              path="checkout"
+              element={<Checkout />}
+            />
           </Routes>
         </Layout>
       </ApiProvider>

@@ -8,13 +8,14 @@ interface Props {
 };
 
 function AddToCartButton({ id }: Props) {
-  const { mutate: addToCart, data, isLoading, error } = useAddToCart({ id });
+  const { mutate: addToCart, data, isLoading } = useAddToCart({ id });
   const { data: user, refetch } = useUser();
   const added = !!user?.authenticatedItem.cart.find((cartItem: any) => cartItem.product.id === id)
 
   useEffect(() => {
     refetch();
   }, [data, refetch]);
+
   if (user) {
     return (
       <>
@@ -38,7 +39,9 @@ function AddToCartButton({ id }: Props) {
       <Button
         as='a'
         href="sign-in"
-      >Add To Cart</Button>
+      >
+        Add To Cart
+      </Button>
     );
   };
 };

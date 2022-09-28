@@ -58,6 +58,15 @@ export type IOrderItem = {
   order: IOrder;
 };
 
+export type IAddress = {
+  name: string;
+  street: string;
+  street2: string;
+  city: string;
+  state: string;
+  country: string;
+};
+
 export type IBreadcrumbItem = {
   name: string;
   href: string;
