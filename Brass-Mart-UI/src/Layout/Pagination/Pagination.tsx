@@ -25,6 +25,7 @@ function Pagination({
       justifyContent="center"
     >
       <Button
+        isLoading={isLoading}
         onClick={() => {
           setPage(page - 1)
           setSkip((prevState: any) => prevState - take)
@@ -35,6 +36,7 @@ function Pagination({
       </Button>
       <Text>Page {page} of {pageCount}</Text>
       <Button
+        isLoading={isLoading}
         onClick={() => {
           setPage(page + 1)
           setSkip((prevState: any) => prevState + take)

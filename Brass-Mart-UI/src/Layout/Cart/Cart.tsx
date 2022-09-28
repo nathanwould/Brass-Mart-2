@@ -1,4 +1,5 @@
 import {
+  Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -8,6 +9,7 @@ import {
   DrawerOverlay,
   Grid,
   GridItem,
+  StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -38,10 +40,9 @@ function Cart({ user, isOpen, onClose }: Props) {
         <DrawerCloseButton />
         <DrawerHeader>{firstName}'s Cart</DrawerHeader>
         <DrawerBody>
-          <VStack spacing={2}>  
+          <VStack spacing={2} divider={<StackDivider borderColor='gray.200' />}>  
             {user?.cartCount > 0 ?
               user.cart.map((item: ICartItem) => {
-                console.log(item.id)
                 const { name, price } = item.product;
                 const photo = item.product.photos[0]?.image.publicUrlTransformed;
                 return (
@@ -58,6 +59,7 @@ function Cart({ user, isOpen, onClose }: Props) {
             }
           </VStack>
         </DrawerBody>
+        <Divider borderColor="gray.200" />
         <DrawerFooter justifyContent="flex-start">
           <Grid
             w="100%"

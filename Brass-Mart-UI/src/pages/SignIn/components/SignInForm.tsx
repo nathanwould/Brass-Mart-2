@@ -1,18 +1,35 @@
-import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Center,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSignIn from '../../../requests/mutations/useSignIn';
 import useUser from '../../../requests/queries/useUser';
 
+interface FormData {
+  email: string,
+  password: string,
+};
+
 function SignInForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState<FormData>({
+    email: '',
+    password: '',
+  });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { data: sessionData, refetch } = useUser();
 
   const { mutate: signIn, data, isLoading } = useSignIn(
-    { email, password },
+    { ...form },
     {
       onSuccess: (data: any) => {
         if (data.authenticateUserWithPassword.item) {
@@ -53,8 +70,8 @@ function SignInForm() {
                   type='email'
                   placeholder='Your email...'
                   name='email'
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  value={form?.email}
+                  onChange={(e) => setForm({...form, email: e.target.value})}
                 />
               </FormControl>
               <FormControl isRequired={true}>
@@ -63,8 +80,8 @@ function SignInForm() {
                   type='password'
                   placeholder='Your password...'
                   name='password'
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  value={form?.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value})}
                 />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
             </FormControl>

@@ -31,7 +31,7 @@ export default function WithSubnavigation() {
   const { onOpen, isOpen: cartIsOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  const { data: sessionData, mutate: signOut, isLoading } = useSignOut({
+  const { data: sessionData, mutate: signOut } = useSignOut({
     onSuccess: () => {
       navigate('/')
     },

@@ -1,8 +1,8 @@
-import { Stack, Image, Text } from '@chakra-ui/react';
+import { Stack, Image, Text, SimpleGrid, Box } from '@chakra-ui/react';
 import { formatMoney } from '../../../utils/formatMoney';
 import RemoveFromCart from './RemoveFromCart';
 
-type Props = {
+interface Props {
   id: string;
   photo: string;
   name: string;
@@ -11,11 +11,12 @@ type Props = {
 
 export default function CartItem({ id, photo, name, price }: Props) {
   return (
-    <Stack
-      direction={{ base: "row" }}
+    <SimpleGrid
+      // direction={{ base: "row" }}
+      columns={3}
       maxW="100%"
       minW="100%"
-      justifyContent="space-between"
+      // justifyContent="space-between"
     >
       
       <Image
@@ -26,13 +27,19 @@ export default function CartItem({ id, photo, name, price }: Props) {
         objectFit="cover"
       />
 
-      <Stack p={2} justifyContent={"center"}>
+      <Stack
+        p={2}
+        justify={"center"}
+        align="left"
+      >
         <Text>{name}</Text>
         <Text>{formatMoney(price)}</Text>
       </Stack>
 
-      <RemoveFromCart id={id} />
+      <Box textAlign="right">
+        <RemoveFromCart id={id} />
+      </Box>
 
-    </Stack>
+    </SimpleGrid>
   );
 };
