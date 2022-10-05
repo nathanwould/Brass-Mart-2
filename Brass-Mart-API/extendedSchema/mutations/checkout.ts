@@ -1,13 +1,14 @@
 import { KeystoneContext } from "@keystone-6/core/types";
 import stripeConfig from "../../lib/stripe";
 
-interface Arguments {
-  root: any,
-  token: string,
-  context: KeystoneContext
-}
+// interface Args {
+//   // root: any,
+//   token: string,
+//   context: KeystoneContext
+// }
 
-async function checkout({root, token, context}: Arguments) {
+async function checkout(root: any, token: any, context: KeystoneContext) {
+  // console.log(token.valueOf)
     // 1. Make sure they're signed in
     const userId = context.session.itemId;
     // console.log(userId)
@@ -45,14 +46,9 @@ async function checkout({root, token, context}: Arguments) {
   const orderItems = cartItems.map((cartItem: any) => {
     const photoIds = cartItem.product.photos.map((photo: any) => ({ id: photo.id }))
     const orderItem = {
-      name: cartItem.product.name,
-      description: cartItem.product.description,
-      price: cartItem.product.price,
+      product: cartItem.product,
       quantity: cartItem.quantity,
-      photos: {
-        connect: photoIds
-      },
-    }
+    };
     return orderItem
   })
     // 6. Create order and return it
