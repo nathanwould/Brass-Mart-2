@@ -26,9 +26,9 @@ function SignInForm() {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { data: sessionData, refetch } = useUser();
+  const { refetch } = useUser();
 
-  const { mutate: signIn, data, isLoading } = useSignIn(
+  const { mutate: signIn, isLoading } = useSignIn(
     { ...form },
     {
       onSuccess: (data: any) => {

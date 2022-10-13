@@ -38,3 +38,7 @@ export type ListAccessArgs = {
   itemId?: string;
   session?: Session;
 };
+
+export type PaymentIntent = {
+  createPaymentIntent: string;
+};

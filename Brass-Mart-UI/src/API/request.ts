@@ -1,6 +1,5 @@
 import { GraphQLClient, RequestOptions } from "graphql-request";
 
-
 const useRequest = (opts: RequestOptions) => {
   const endpoint = `${process.env.REACT_APP_API_BASE_URL}/api/graphql`;
 

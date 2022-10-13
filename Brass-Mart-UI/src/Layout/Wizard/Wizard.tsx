@@ -1,5 +1,5 @@
 import { ArrowBackIcon, ArrowForwardIcon, ArrowRightIcon } from '@chakra-ui/icons';
-import { Button, Flex, SlideDirection, VStack, Text } from '@chakra-ui/react';
+import { Button, Flex, SlideDirection, VStack, Text, Box, HStack } from '@chakra-ui/react';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 export interface WizardContextProps {
@@ -113,7 +113,7 @@ const Progress = ({ stepItems }: ProgressProps) => {
     >
       {stepItems?.map((item: string, index: number) => (
         index < stepItems.length-1 ?
-          <>
+          <HStack key={index}>
             <Text
               color={index >= currentStep ? "gray.600" : "green.500"}
               transition="all .3s ease"
@@ -125,11 +125,11 @@ const Progress = ({ stepItems }: ProgressProps) => {
               color={index >= currentStep ? "gray.600" : "green.500"}
               transition="all .3s ease"
             />
-          </>
+          </HStack>
           :
-          <>
+          <Box key={index}>
             <Text color={index >= currentStep ? "gray.600" : "green.500"}>{item}</Text>
-          </>
+          </Box>
       ))}
     </Flex>
   )
@@ -146,7 +146,7 @@ function NextButton({
   return (
     <Button
       colorScheme="green"
-      rightIcon={<ArrowForwardIcon />}
+      rightIcon={text !== "Place Order" ? <ArrowForwardIcon /> : undefined}
       onClick={goNext}
     >
       {text}

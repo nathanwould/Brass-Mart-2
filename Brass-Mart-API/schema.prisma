@@ -78,6 +78,7 @@ model OrderItem {
   id        String   @id @default(cuid())
   product   Product? @relation("OrderItem_product", fields: [productId], references: [id])
   productId String?  @map("product")
+  quantity  Int?
   order     Order?   @relation("OrderItem_order", fields: [orderId], references: [id])
   orderId   String?  @map("order")
 

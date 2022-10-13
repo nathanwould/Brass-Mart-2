@@ -4,7 +4,7 @@ import { useCheckoutContext } from '../Checkout';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
 
 function ShippingForm() {
-  const { address, setAddress } = useCheckoutContext();
+  const { shippingAddress, setShippingAddress } = useCheckoutContext();
 
   // console.log(form)
   return (
@@ -13,22 +13,22 @@ function ShippingForm() {
       <FormControl isRequired>
         <FormLabel>Name</FormLabel>
         <Input
-          value={address.name}
-          onChange={(e) => setAddress({...address, name: e.target.value})}
+          value={shippingAddress.name}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, name: e.target.value })}
         />
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Street</FormLabel>
         <Input
-          value={address.street}
-          onChange={(e) => setAddress({...address, street: e.target.value})}
+          value={shippingAddress.street}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value })}
         />
       </FormControl>
       <FormControl>
         <FormLabel>Street #2</FormLabel>
         <Input
-          value={address.street2}
-          onChange={(e) => setAddress({...address, street2: e.target.value})}
+          value={shippingAddress.street2}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, street2: e.target.value })}
         />
       </FormControl>
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
@@ -36,8 +36,8 @@ function ShippingForm() {
           <FormControl isRequired>
             <FormLabel>City</FormLabel>
             <Input 
-              value={address.city}
-              onChange={(e) => setAddress({...address, city: e.target.value})}
+              value={shippingAddress.city}
+              onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
             />
           </FormControl>
         </GridItem>
@@ -45,8 +45,8 @@ function ShippingForm() {
           <FormControl isRequired>
             <FormLabel>State</FormLabel>
             <Input
-              value={address.state}
-              onChange={(e) => setAddress({...address, state: e.target.value})}
+              value={shippingAddress.state}
+              onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
             />
           </FormControl>
         </GridItem>
@@ -54,8 +54,8 @@ function ShippingForm() {
       <FormControl isRequired>
         <FormLabel>Country</FormLabel>
         <Select
-          value={address.country}
-          onChange={(e) => setAddress({ ...address, country: e.target.value })}
+          value={shippingAddress.country}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
         >
           <option>United States of America</option>
         </Select>

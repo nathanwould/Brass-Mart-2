@@ -1,10 +1,14 @@
 import { Button } from '@chakra-ui/react';
 
-function CheckoutButton() {
+interface Props {
+  id: string
+};
+
+function CheckoutButton({ id }: Props) {
   return (
     <Button
       as="a"
-      href="/checkout"
+      href={`/checkout/${id}`}
       colorScheme="blue"
       minW={100}
     >
