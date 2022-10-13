@@ -74,7 +74,7 @@ function Cart({ user, isOpen, onClose }: Props) {
               <Text align="right">{formatMoney(calcTotalPrice(user?.cart))}</Text>
             </GridItem>
             <GridItem colSpan={2}>
-              <CheckoutButton />
+              <CheckoutButton id={user?.id} />
             </GridItem>
           </Grid>
         </DrawerFooter>

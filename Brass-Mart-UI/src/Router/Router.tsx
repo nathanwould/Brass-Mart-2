@@ -8,6 +8,7 @@ import Instruments from "../pages/Instruments/Instruments";
 import SignIn from "../pages/SignIn/SignIn";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Checkout from "../pages/Checkout/Checkout";
+import ThankYou from "../pages/ThankYou/ThankYou";
 
 // interface RouteProps {
 //   [x: string]: any,
@@ -50,8 +51,12 @@ function Router() {
               element={<SignUp />}
             /> */}
             <Route
-              path="checkout"
+              path="checkout/:id"
               element={<Checkout />}
+            />
+            <Route
+              path="thank-you/:id"
+              element={<ThankYou />}
             />
           </Routes>
         </Layout>

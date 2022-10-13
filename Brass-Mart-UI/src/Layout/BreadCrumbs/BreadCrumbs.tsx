@@ -1,9 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-
-export interface IBreadcrumbItem {
-  name: string;
-  href: string;
-};
+import { IBreadcrumbItem } from '../../types';
 
 interface Props {
   items?: IBreadcrumbItem[];
