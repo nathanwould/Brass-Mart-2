@@ -3,14 +3,16 @@ import stripeConfig from "../../lib/stripe";
 
 interface Args {
   token: string;
+  shippingAddress: any,
+  billingAddress: any,
 }
 
 async function checkout(
   root: any,
-  { token }: Args,
+  { token, shippingAddress, billingAddress }: Args,
   context: KeystoneContext
 ) {
-  console.log(token)
+  console.log(shippingAddress, billingAddress)
   if (!token) {
     throw new Error('Stripe token is missing!')
   }
@@ -40,10 +42,8 @@ async function checkout(
     console.log(err)
     throw new Error(err.message)
   });
-  // console.log(charge)
 
   // 5.1 Convert CartItems to OrderItems
-  // console.log(cartItems)
   const orderItems = cartItems.map((cartItem: any) => {
     const photoIds = cartItem.product.photos.map((photo: any) => ({ id: photo.id }))
     const orderItem = {
@@ -51,19 +51,20 @@ async function checkout(
       quantity: cartItem.quantity,
     };
     return orderItem
-  })
+  });
   // 6. Create order and return it
   const order = await context.db.Order.createOne({
     data: {
       total: charge.amount,
+      shipTo: { create: shippingAddress},
+      billTo: { create: billingAddress },
       charge: charge.id,
       items: { create: orderItems },
       user: { connect: { id: userId } },
     },
   });
-  // console.log(order)
+  // 7. Clear user's cart
   const cartItemIds = user.cart.map((cartItem: any) => ({ id: cartItem.id} ));
-  console.log(cartItemIds)
   await context.db.CartItem.deleteMany({
     where: cartItemIds,
   });

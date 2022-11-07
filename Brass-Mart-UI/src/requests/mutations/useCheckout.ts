@@ -3,8 +3,16 @@ import { useMutation, UseMutationOptions } from "react-query";
 import request from "../../API/request";
 
 export const CHECKOUT_MUTATION = gql`
-  mutation CHECKOUT_MUTATION($token: String!) {
-    checkout(token: $token) {
+  mutation CHECKOUT_MUTATION(
+    $token: String!
+    $shippingAddress: AddressCreateInput!
+    $billingAddress: AddressCreateInput!
+    ) {
+    checkout(
+      token: $token
+      shippingAddress: $shippingAddress,
+      billingAddress: $billingAddress
+      ) {
       id
       charge
       total

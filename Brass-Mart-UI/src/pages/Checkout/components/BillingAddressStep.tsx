@@ -17,7 +17,8 @@ function BillingAddressStep() {
         street2: '',
         city: '',
         state: '',
-        country: '',
+        zipCode: '',
+        country: 'USA',
       })
   }, [checked, shippingAddress, setBillingAddress]);
 

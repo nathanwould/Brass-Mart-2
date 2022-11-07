@@ -12,13 +12,11 @@ interface Props {
 export default function CartItem({ id, photo, name, price }: Props) {
   return (
     <SimpleGrid
-      // direction={{ base: "row" }}
+      key={id}
       columns={3}
       maxW="100%"
       minW="100%"
-      // justifyContent="space-between"
     >
-      
       <Image
         src={photo}
         alt={name}
@@ -26,7 +24,6 @@ export default function CartItem({ id, photo, name, price }: Props) {
         h={24}
         objectFit="cover"
       />
-
       <Stack
         p={2}
         justify={"center"}
@@ -35,11 +32,9 @@ export default function CartItem({ id, photo, name, price }: Props) {
         <Text>{name}</Text>
         <Text>{formatMoney(price)}</Text>
       </Stack>
-
       <Box textAlign="right">
         <RemoveFromCart id={id} />
       </Box>
-
     </SimpleGrid>
   );
 };

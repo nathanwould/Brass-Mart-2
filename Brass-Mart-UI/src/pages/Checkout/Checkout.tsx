@@ -20,7 +20,8 @@ const initialAddressState = {
   street2: '',
   city: '',
   state: '',
-  country: '',
+  zipCode: '',
+  country: 'USA',
 }
 
 const CheckoutContext = createContext<CheckoutContextProps>({

@@ -51,16 +51,29 @@ function ShippingForm() {
           </FormControl>
         </GridItem>
       </Grid>
-      <FormControl isRequired>
-        <FormLabel>Country</FormLabel>
-        <Select
-          value={shippingAddress.country}
-          onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
-        >
-          <option>United States of America</option>
-        </Select>
-        <FormHelperText>For shipping outside of the US, please call to place order.</FormHelperText>
-      </FormControl>
+      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+        <GridItem colSpan={1}>
+          <FormControl isRequired>
+            <FormLabel>Zip</FormLabel>
+            <Input
+              value={shippingAddress.zipCode}
+              onChange={(e) => setShippingAddress({ ...shippingAddress, zipCode: e.target.value })}
+            />
+          </FormControl>
+        </GridItem>
+        <GridItem colSpan={2}>
+          <FormControl isRequired>
+            <FormLabel>Country</FormLabel>
+            <Select
+              value={shippingAddress.country}
+              onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
+            >
+              <option>USA</option>
+            </Select>
+            <FormHelperText>For shipping outside of the US, please call to place order.</FormHelperText>
+          </FormControl>
+        </GridItem>
+      </Grid>
       <Flex justifyContent="space-between" >
         <PrevButton text="Back" />
         <NextButton text="Payment" />

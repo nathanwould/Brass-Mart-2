@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useUser from '../../../../requests/queries/useUser';
 import { useMutation } from 'react-query';
 import request from '../../../../API/request';
+import { useCheckoutContext } from '../../Checkout';
 
 interface Props {
   isLoading: boolean;
@@ -22,17 +23,20 @@ function PaymentForm({
   error,
   setError
 }: Props) {
+  const { shippingAddress, billingAddress } = useCheckoutContext();
   const [success, setSuccess] = useState<boolean>(false);
   const { refetch } = useUser();
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
 
+  console.log(shippingAddress, billingAddress)
+
   const mutation = useMutation(['checkout'], (paymentIntent: string) => {
-    console.log(paymentIntent)
+    // console.log(paymentIntent)
     return request({
     document: CHECKOUT_MUTATION,
-    variables: { token: paymentIntent },
+    variables: { token: paymentIntent, shippingAddress, billingAddress },
   })});
 
   async function handleSubmit(e: React.SyntheticEvent) {

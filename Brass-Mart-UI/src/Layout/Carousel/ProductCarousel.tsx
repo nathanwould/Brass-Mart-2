@@ -50,6 +50,7 @@ function ProductCarousel({ products }: Props) {
             const image = product.photos[0].image.publicUrlTransformed;
             return (
               <VStack
+                key={id}
                 shadow="md"
                 textAlign="center"
                 paddingBottom={4}

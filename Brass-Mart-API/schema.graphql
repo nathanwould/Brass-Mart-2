@@ -3,7 +3,11 @@
 
 type Mutation {
   addToCart(productId: ID!): CartItem
-  checkout(token: String!): Order
+  checkout(
+    token: String!
+    shippingAddress: AddressCreateInput!
+    billingAddress: AddressCreateInput!
+  ): Order
   createUser(data: UserCreateInput!): User
   createUsers(data: [UserCreateInput!]!): [User]
   updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
@@ -52,6 +56,15 @@ type Mutation {
   updateOrderItems(data: [OrderItemUpdateArgs!]!): [OrderItem]
   deleteOrderItem(where: OrderItemWhereUniqueInput!): OrderItem
   deleteOrderItems(where: [OrderItemWhereUniqueInput!]!): [OrderItem]
+  createAddress(data: AddressCreateInput!): Address
+  createAddresses(data: [AddressCreateInput!]!): [Address]
+  updateAddress(
+    where: AddressWhereUniqueInput!
+    data: AddressUpdateInput!
+  ): Address
+  updateAddresses(data: [AddressUpdateArgs!]!): [Address]
+  deleteAddress(where: AddressWhereUniqueInput!): Address
+  deleteAddresses(where: [AddressWhereUniqueInput!]!): [Address]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -547,6 +560,8 @@ type Order {
   itemsCount(where: OrderItemWhereInput! = {}): Int
   user: User
   charge: String
+  shipTo: Address
+  billTo: Address
   createdAt: DateTime
 }
 
@@ -563,6 +578,8 @@ input OrderWhereInput {
   items: OrderItemManyRelationFilter
   user: UserWhereInput
   charge: StringFilter
+  shipTo: AddressWhereInput
+  billTo: AddressWhereInput
   createdAt: DateTimeNullableFilter
 }
 
@@ -595,6 +612,8 @@ input OrderUpdateInput {
   items: OrderItemRelateToManyForUpdateInput
   user: UserRelateToOneForUpdateInput
   charge: String
+  shipTo: AddressRelateToOneForUpdateInput
+  billTo: AddressRelateToOneForUpdateInput
   createdAt: DateTime
 }
 
@@ -603,6 +622,12 @@ input OrderItemRelateToManyForUpdateInput {
   set: [OrderItemWhereUniqueInput!]
   create: [OrderItemCreateInput!]
   connect: [OrderItemWhereUniqueInput!]
+}
+
+input AddressRelateToOneForUpdateInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
+  disconnect: Boolean
 }
 
 input OrderUpdateArgs {
@@ -615,12 +640,19 @@ input OrderCreateInput {
   items: OrderItemRelateToManyForCreateInput
   user: UserRelateToOneForCreateInput
   charge: String
+  shipTo: AddressRelateToOneForCreateInput
+  billTo: AddressRelateToOneForCreateInput
   createdAt: DateTime
 }
 
 input OrderItemRelateToManyForCreateInput {
   create: [OrderItemCreateInput!]
   connect: [OrderItemWhereUniqueInput!]
+}
+
+input AddressRelateToOneForCreateInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
 }
 
 type OrderItem {
@@ -675,6 +707,71 @@ input OrderItemCreateInput {
 input OrderRelateToOneForCreateInput {
   create: OrderCreateInput
   connect: OrderWhereUniqueInput
+}
+
+type Address {
+  id: ID!
+  name: String
+  street: String
+  street2: String
+  city: String
+  state: String
+  zipCode: String
+  country: String
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
+
+input AddressWhereInput {
+  AND: [AddressWhereInput!]
+  OR: [AddressWhereInput!]
+  NOT: [AddressWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  street: StringFilter
+  street2: StringFilter
+  city: StringFilter
+  state: StringFilter
+  zipCode: StringFilter
+  country: StringFilter
+}
+
+input AddressOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  street: OrderDirection
+  street2: OrderDirection
+  city: OrderDirection
+  state: OrderDirection
+  zipCode: OrderDirection
+  country: OrderDirection
+}
+
+input AddressUpdateInput {
+  name: String
+  street: String
+  street2: String
+  city: String
+  state: String
+  zipCode: String
+  country: String
+}
+
+input AddressUpdateArgs {
+  where: AddressWhereUniqueInput!
+  data: AddressUpdateInput!
+}
+
+input AddressCreateInput {
+  name: String
+  street: String
+  street2: String
+  city: String
+  state: String
+  zipCode: String
+  country: String
 }
 
 """
@@ -753,6 +850,14 @@ type Query {
   ): [OrderItem!]
   orderItem(where: OrderItemWhereUniqueInput!): OrderItem
   orderItemsCount(where: OrderItemWhereInput! = {}): Int
+  addresses(
+    where: AddressWhereInput! = {}
+    orderBy: [AddressOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Address!]
+  address(where: AddressWhereUniqueInput!): Address
+  addressesCount(where: AddressWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
