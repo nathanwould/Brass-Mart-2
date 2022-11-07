@@ -1,5 +1,4 @@
-import { ComponentType } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useMediaQuery } from "@chakra-ui/react";
 import ApiProvider from "../API/ApiProvider";
 import Home from "../pages/Home/Home";
@@ -9,6 +8,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Checkout from "../pages/Checkout/Checkout";
 import ThankYou from "../pages/ThankYou/ThankYou";
+import Account from '../pages/Account/Account';
 
 // interface RouteProps {
 //   [x: string]: any,
@@ -57,6 +57,10 @@ function Router() {
             <Route
               path="thank-you/:id"
               element={<ThankYou />}
+            />
+            <Route
+              path="account"
+              element={<Account />}
             />
           </Routes>
         </Layout>

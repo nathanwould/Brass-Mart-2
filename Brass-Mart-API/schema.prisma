@@ -69,9 +69,15 @@ model Order {
   user      User?       @relation("Order_user", fields: [userId], references: [id])
   userId    String?     @map("user")
   charge    String      @default("")
+  shipTo    Address?    @relation("Order_shipTo", fields: [shipToId], references: [id])
+  shipToId  String?     @map("shipTo")
+  billTo    Address?    @relation("Order_billTo", fields: [billToId], references: [id])
+  billToId  String?     @map("billTo")
   createdAt DateTime?   @default(now())
 
   @@index([userId])
+  @@index([shipToId])
+  @@index([billToId])
 }
 
 model OrderItem {
@@ -84,4 +90,17 @@ model OrderItem {
 
   @@index([productId])
   @@index([orderId])
+}
+
+model Address {
+  id                String  @id @default(cuid())
+  name              String  @default("")
+  street            String  @default("")
+  street2           String  @default("")
+  city              String  @default("")
+  state             String  @default("")
+  zipCode           String  @default("")
+  country           String  @default("")
+  from_Order_shipTo Order[] @relation("Order_shipTo")
+  from_Order_billTo Order[] @relation("Order_billTo")
 }

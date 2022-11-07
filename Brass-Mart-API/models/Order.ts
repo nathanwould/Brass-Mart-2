@@ -7,6 +7,8 @@ export const Order = list({
     items: relationship({ ref: 'OrderItem.order', many: true }),
     user: relationship({ ref: 'User.orders' }),
     charge: text(),
+    shipTo: relationship({ ref: 'Address' }),
+    billTo: relationship({ ref: 'Address' }),
     createdAt: timestamp({
       defaultValue: {
         kind: 'now',

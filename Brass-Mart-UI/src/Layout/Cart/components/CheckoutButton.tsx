@@ -1,16 +1,19 @@
 import { Button } from '@chakra-ui/react';
+import { ICartItem } from '../../../types';
 
 interface Props {
-  id: string
+  id: string;
+  cartCount: number;
 };
 
-function CheckoutButton({ id }: Props) {
+function CheckoutButton({ id, cartCount }: Props) {
   return (
     <Button
       as="a"
       href={`/checkout/${id}`}
       colorScheme="blue"
       minW={100}
+      isDisabled={cartCount < 1}
     >
       Checkout
     </Button>

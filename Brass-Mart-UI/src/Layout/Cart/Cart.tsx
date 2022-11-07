@@ -28,7 +28,6 @@ interface Props {
 
 function Cart({ user, isOpen, onClose }: Props) {
   const firstName = user?.name.split(' ')[0];
-
   return (
     <Drawer
       placement='right'
@@ -74,7 +73,7 @@ function Cart({ user, isOpen, onClose }: Props) {
               <Text align="right">{formatMoney(calcTotalPrice(user?.cart))}</Text>
             </GridItem>
             <GridItem colSpan={2}>
-              <CheckoutButton id={user?.id} />
+              <CheckoutButton id={user?.id} cartCount={user?.cartCount} />
             </GridItem>
           </Grid>
         </DrawerFooter>

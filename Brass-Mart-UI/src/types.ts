@@ -65,6 +65,7 @@ export type IAddress = {
   street2: string;
   city: string;
   state: string;
+  zipCode: string;
   country: string;
 };
 
