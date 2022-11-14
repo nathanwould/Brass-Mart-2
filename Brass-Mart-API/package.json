@@ -11,10 +11,11 @@
     "postinstall-fix": "keystone postinstall --fix"
   },
   "dependencies": {
-    "@keystone-6/auth": "^1.0.1",
-    "@keystone-6/cloudinary": "^2.0.0",
-    "@keystone-6/core": "^1.0.1",
-    "@keystone-6/fields-document": "^1.0.1",
+    "@graphql-tools/schema": "^9.0.10",
+    "@keystone-6/auth": "5.0.0",
+    "@keystone-6/cloudinary": "5.0.0",
+    "@keystone-6/core": "3.0.0",
+    "@keystone-6/fields-document": "5.0.0",
     "dotenv": "^16.0.1",
     "next": "^12.2.4",
     "stripe": "^8.188.0",

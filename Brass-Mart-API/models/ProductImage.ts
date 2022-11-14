@@ -1,19 +1,21 @@
 import { list } from "@keystone-6/core";
 import { cloudinaryImage } from '@keystone-6/cloudinary';
 import { relationship, text } from "@keystone-6/core/fields";
+import { allowAll } from "@keystone-6/core/access";
 
 export const cloudinary = {
-  cloudName: process.env.CLOUDINARY_CLOUD_NAME || 'dkyy9wjvs',
-  apiKey: process.env.CLOUDINARY_KEY || '591194678998568',
-  apiSecret: process.env.CLOUDINARY_SECRET || '3QndzzGcefbUBrLh6OQPLHfw4_A',
-  // folder: '',
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME || '',
+  apiKey: process.env.CLOUDINARY_KEY || '',
+  apiSecret: process.env.CLOUDINARY_SECRET || '',
+  // folder: 'BrassMart2',
 }
 
 export const ProductImage = list({
+  access: allowAll,
   fields: {
     image: cloudinaryImage({
       cloudinary,
-      label: 'Source',
+      // label: 'Source',
     }),
     altText: text({
       validation: { isRequired: true }

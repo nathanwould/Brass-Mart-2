@@ -1,4 +1,4 @@
-import { Lists } from '.keystone/types';
+// import { Lists } from '.keystone/types';
 import { Address } from './models/Address';
 import { CartItem } from './models/CartItem';
 import { Order } from './models/Order';
@@ -7,7 +7,7 @@ import { Product } from './models/Product';
 import { ProductImage } from './models/ProductImage';
 import { User } from './models/User';
 
-export const lists: Lists = {
+export const lists = {
   User,
   Product,
   ProductImage,

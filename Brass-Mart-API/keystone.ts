@@ -1,9 +1,16 @@
 import { config } from '@keystone-6/core';
-import { lists } from './schema';
+import { mergeSchemas } from '@graphql-tools/schema';
 import { withAuth, session } from './auth';
-import { extendGraphqlSchema } from './extendedSchema';
+import { lists } from './schema';
+import addToCart from './extendedSchema/mutations/addToCart';
+import checkout from './extendedSchema/mutations/checkout';
+// import { extendGraphqlSchema } from './extendedSchema';
+
+const graphql = String.raw;
 
 const frontEndURL = process.env.FRONTEND_URL || "http://localhost:7777";
+
+const databaseURL = process.env.DATABASE_URL || 'postgres://admin:adminpassword@localhost/brassmart2';
 
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
@@ -16,8 +23,8 @@ export default withAuth(
     },
     // the db sets the database provider - we're using sqlite for the fastest startup experience
     db: {
-      provider: 'sqlite',
-      url: 'file:./keystone.db',
+      provider: 'postgresql',
+      url: databaseURL,
       onConnect: async context => {
         console.log(`Session secret: ${process.env.FRONTEND_URL}`);
         // console.log(context);
@@ -32,7 +39,22 @@ export default withAuth(
       isAccessAllowed: (context) => true /*!!context.session?.data*/,
     },
     lists,
-    extendGraphqlSchema,
+    extendGraphqlSchema: schema =>
+      mergeSchemas({
+        schemas: [schema],
+        typeDefs: graphql`
+          type Mutation {
+            addToCart(productId: ID!): CartItem
+            checkout(token: String!, shippingAddress: AddressCreateInput!, billingAddress: AddressCreateInput!): Order
+          }
+        `,
+        resolvers: {
+          Mutation: {
+            addToCart,
+            checkout,
+          },
+        },
+    }),
     session,
   })
 );

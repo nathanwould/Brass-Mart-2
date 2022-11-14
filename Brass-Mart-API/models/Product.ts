@@ -1,7 +1,9 @@
 import { list } from "@keystone-6/core";
+import { allowAll } from "@keystone-6/core/access";
 import { float, integer, relationship, select, text, timestamp } from "@keystone-6/core/fields";
 
 export const Product = list({
+  access: allowAll,
   fields: {
     productType: select({
       options: [
