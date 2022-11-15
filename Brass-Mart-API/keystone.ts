@@ -26,7 +26,7 @@ export default withAuth(
       provider: 'postgresql',
       url: databaseURL,
       onConnect: async context => {
-        console.log(`Session secret: ${process.env.FRONTEND_URL}`);
+        console.log(`Session secret: ${process.env.SESSION_SECRET}`);
         // console.log(context);
         // if (process.argv.includes('--seed-data')) {
         //   await insertSeedData(keystone);
