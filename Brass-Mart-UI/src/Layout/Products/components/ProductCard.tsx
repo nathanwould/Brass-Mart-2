@@ -25,14 +25,16 @@ function ProductCard({ id, title, photo, price }: Props) {
         as="a"
         href={`/products/${id}`}
       >
-        <Image
-          src={photo?.image.publicUrlTransformed}
-          alt={photo.alt}
-          objectFit="cover"
-          style={{
-            aspectRatio: "4 / 3"
-          }}
-        />
+        {photo &&
+          <Image
+            src={photo?.image.publicUrlTransformed}
+            alt={photo?.alt}
+            objectFit="cover"
+            style={{
+              aspectRatio: "4 / 3"
+            }}
+          />
+        }
       </Box>
       <Spacer />
       <VStack

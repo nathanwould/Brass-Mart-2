@@ -10,7 +10,7 @@ interface Props {
 function AddToCartButton({ id }: Props) {
   const { mutate: addToCart, data, isLoading } = useAddToCart({ id });
   const { data: user, refetch } = useUser();
-  const added = !!user?.authenticatedItem.cart.find((cartItem: any) => cartItem.product.id === id)
+  const added = !!user?.authenticatedItem?.cart?.find((cartItem: any) => cartItem.product.id === id)
 
   useEffect(() => {
     refetch();
