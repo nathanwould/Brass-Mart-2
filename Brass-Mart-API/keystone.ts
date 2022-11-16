@@ -16,7 +16,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: frontEndURL,
+        origin: [frontEndURL],
         credentials: true,
       },
     },
