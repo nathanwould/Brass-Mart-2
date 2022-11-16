@@ -10,7 +10,7 @@ export const cloudinary = {
   folder: process.env.CLOUDINARY_FOLDER,
 };
 
-console.log(cloudinary)
+// console.log(cloudinary)
 
 export const ProductImage = list({
   access: allowAll,

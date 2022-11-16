@@ -4,7 +4,6 @@ import { withAuth, session } from './auth';
 import { lists } from './schema';
 import addToCart from './extendedSchema/mutations/addToCart';
 import checkout from './extendedSchema/mutations/checkout';
-// import { extendGraphqlSchema } from './extendedSchema';
 
 const graphql = String.raw;
 
@@ -26,7 +25,7 @@ export default withAuth(
       provider: 'postgresql',
       url: databaseURL,
       onConnect: async context => {
-        console.log(`Session secret: ${process.env.SESSION_SECRET}`);
+        console.log('Connected to DB');
         // console.log(context);
         // if (process.argv.includes('--seed-data')) {
         //   await insertSeedData(keystone);
@@ -36,7 +35,7 @@ export default withAuth(
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {
       // For our starter, we check that someone has session data before letting them see the Admin UI.
-      isAccessAllowed: (context) => true /*!!context.session?.data*/,
+      isAccessAllowed: (context) => !!context.session?.data,
     },
     lists,
     extendGraphqlSchema: schema =>
