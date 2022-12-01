@@ -5,7 +5,7 @@
   "scripts": {
     "install": "if [ $CLIENT_ENV ]; then cd Brass-Mart-UI && npm install; elif [ $SERVER_ENV ]; then cd Brass-Mart-API && npm install; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
     "build": "if [ $CLIENT_ENV ]; then cd Brass-Mart-UI && npm run build; elif [ $SERVER_ENV ]; then cd Brass-Mart-API && npm install && npm run build; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
-    "postinstall": "if [ $CLIENT_ENV ]; then cd Brass-Mart-UI && npm run build; elif [ $SERVER_ENV ]; then cd Brass-Mart-API && npm run postinstall && npm run start; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
+    "postinstall": "if [ $CLIENT_ENV ]; then cd Brass-Mart-UI && npm run build; elif [ $SERVER_ENV ]; then cd Brass-Mart-API && npm run build; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
     "deploy": "keystone build && keystone prisma migrate deploy"
   }
 }
