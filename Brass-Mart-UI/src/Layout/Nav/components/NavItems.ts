@@ -16,7 +16,7 @@ export const NAV_ITEMS: Array<NavItem> = [
       },
       {
         label: 'Accessories',
-        subLabel: 'Accessorize that beezy.',
+        subLabel: 'Shop cases and maintenance products.',
         href: '/accessories',
       },
     ],

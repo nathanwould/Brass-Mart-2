@@ -9,6 +9,7 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Checkout from "../pages/Checkout/Checkout";
 import ThankYou from "../pages/ThankYou/ThankYou";
 import Account from '../pages/Account/Account';
+import SignUp from '../pages/SignUp/SignUp';
 
 // interface RouteProps {
 //   [x: string]: any,
@@ -46,10 +47,10 @@ function Router() {
               path="sign-in"
               element={<SignIn />}
             />
-            {/* <Route
+            <Route
               path="sign-up"
               element={<SignUp />}
-            /> */}
+            />
             <Route
               path="checkout/:id"
               element={<Checkout />}

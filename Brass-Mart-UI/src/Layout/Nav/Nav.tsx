@@ -150,7 +150,7 @@ export default function WithSubnavigation() {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav user={user} />
       </Collapse>
-
+      
       <Cart
         user={user}
         refetch={refetch}

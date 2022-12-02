@@ -41,7 +41,7 @@ function Pagination({
           setPage(page + 1)
           setSkip((prevState: any) => prevState + take)
         }}
-        disabled={count < take * page}
+        disabled={count <= take * page}
       >
         Next
       </Button>
