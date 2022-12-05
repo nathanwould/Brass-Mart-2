@@ -10,6 +10,7 @@ import Checkout from "../pages/Checkout/Checkout";
 import ThankYou from "../pages/ThankYou/ThankYou";
 import Account from '../pages/Account/Account';
 import SignUp from '../pages/SignUp/SignUp';
+import Accessories from '../pages/Accessories/Accessories';
 
 // interface RouteProps {
 //   [x: string]: any,
@@ -35,10 +36,10 @@ function Router() {
               path="instruments"
               element={<Instruments />}
             />
-            {/* <Route
+            <Route
               path="accessories"
               element={<Accessories />}
-            /> */}
+            />
             <Route
               path="products/:id"
               element={<SingleProduct />}

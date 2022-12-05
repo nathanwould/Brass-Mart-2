@@ -1,5 +1,5 @@
-import { Center, Link, Text, VStack } from '@chakra-ui/react'
-import SignInForm from './components/SignInForm'
+import { Center, Link, Text, VStack } from '@chakra-ui/react';
+import SignInForm from './components/SignInForm';
 
 
 function SignIn() {
@@ -14,7 +14,7 @@ function SignIn() {
         </Text>
       </VStack>
     </Center>
-  )
+  );
 }
 
-export default SignIn
+export default SignIn;
