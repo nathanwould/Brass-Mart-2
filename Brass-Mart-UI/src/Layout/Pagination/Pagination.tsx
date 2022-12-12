@@ -17,7 +17,7 @@ function Pagination({
 }: Props) {
   const { data, error, isLoading } = usePagination();
   const count = data?.productsCount;
-  const pageCount = Math.ceil(count / take);
+  const pageCount = count ? Math.ceil(count / take) : 1;
   return (
     <HStack
       spacing={4}
