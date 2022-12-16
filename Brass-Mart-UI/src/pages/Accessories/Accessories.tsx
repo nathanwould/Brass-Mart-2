@@ -34,7 +34,7 @@ function Accessories() {
     <Stack m={6} spacing={6}>
       <BreadCrumbs items={breadcrumbItems} />
       <Heading>Accessories</Heading>
-      {products.length ?
+      {products?.length ?
         <Products
           products={products}
           filter={filter}
