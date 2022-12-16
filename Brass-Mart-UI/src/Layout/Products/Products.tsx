@@ -45,6 +45,7 @@ function Products({
         })}
       </Wrap>
       <Pagination
+        filter={filter}
         page={page}
         setPage={setPage}
         take={take}

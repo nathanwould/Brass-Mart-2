@@ -3,6 +3,7 @@ import React from 'react'
 import usePagination from '../../requests/queries/usePagination';
 
 type Props = {
+  filter: any;
   page: number;
   setPage: any;
   take: number;
@@ -10,12 +11,13 @@ type Props = {
 }
 
 function Pagination({
+  filter,
   page,
   setPage,
   take,
   setSkip
 }: Props) {
-  const { data, error, isLoading } = usePagination();
+  const { data, error, isLoading } = usePagination({ filter });
   const count = data?.productsCount;
   const pageCount = count ? Math.ceil(count / take) : 1;
   return (
