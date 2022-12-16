@@ -1,4 +1,4 @@
-import { Stack, Heading, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import { Stack, Heading, Text, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Products from '../../Layout/Products/Products';
@@ -34,7 +34,8 @@ function Accessories() {
     <Stack m={6} spacing={6}>
       <BreadCrumbs items={breadcrumbItems} />
       <Heading>Accessories</Heading>
-      {products?.length ?
+      { isLoading && <Spinner color="blue.400" /> }
+      { !isLoading && products?.length ?
         <Products
           products={products}
           filter={filter}

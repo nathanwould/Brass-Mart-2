@@ -1,4 +1,4 @@
-import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import { Stack, Heading, Text, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Products from '../../Layout/Products/Products';
@@ -36,17 +36,22 @@ function Instruments({ }: Props) {
     <Stack m={6} spacing={6}>
       <BreadCrumbs items={breadcrumbItems} />
       <Heading>Instruments</Heading>
-      <Products
-        products={products}
-        filter={filter}
-        setFilter={setFilter}
-        take={take}
-        setTake={setTake}
-        skip={skip}
-        setSkip={setSkip}
-        orderBy={orderBy}
-        setOrderBy={setOrderBy}
-      />
+      { isLoading && <Spinner color="blue.400" /> }
+      { !isLoading && products?.length ?
+        <Products
+          products={products}
+          filter={filter}
+          setFilter={setFilter}
+          take={take}
+          setTake={setTake}
+          skip={skip}
+          setSkip={setSkip}
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
+        />
+        :
+        <Text>No instruments found!</Text>
+      }
     </Stack>
   );
 }
