@@ -1,26 +1,27 @@
 import { Stack, Heading, Text, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
+import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
 import { IProduct } from '../../types';
 
-type Props = {}
-
-function Instruments({ }: Props) {
-  const [filter, setFilter] = useState({ productType: { equals: 'instrument' } });
+function Instruments() {
+  const pageCategory = 'instrument'
+  const initialFilter = { productType: { equals: pageCategory} }
+  const [filter, setFilter] = useState(initialFilter);
   const [take, setTake] = useState(8);
   const [skip, setSkip] = useState(0);
   const [orderBy, setOrderBy] = useState({ createdAt: 'desc' })
   
-  const { data, isLoading, error } = useProducts({
+  const { data, isLoading } = useProducts({
     filter,
     take,
     skip,
     orderBy,
   });
   const products: IProduct[] = data?.products;
-
+  
   const breadcrumbItems = [
     {
       name: "Home",
@@ -34,9 +35,19 @@ function Instruments({ }: Props) {
 
   return (
     <Stack m={6} spacing={6}>
+
       <BreadCrumbs items={breadcrumbItems} />
+
       <Heading>Instruments</Heading>
-      { isLoading && <Spinner color="blue.400" /> }
+      
+      <Filter
+        filter={filter}
+        initialFilter={initialFilter}
+        pageCategory={pageCategory}
+      />
+
+      {isLoading && <Spinner color="blue.400" />}
+      
       { !isLoading && products?.length ?
         <Products
           products={products}
@@ -52,6 +63,7 @@ function Instruments({ }: Props) {
         :
         <Text>No instruments found!</Text>
       }
+
     </Stack>
   );
 }
