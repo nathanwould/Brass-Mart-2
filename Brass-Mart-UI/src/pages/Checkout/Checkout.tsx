@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from 'react';
-import Wizard, { Progress, WizardSteps } from '../../Layout/Wizard/Wizard';
+import Progress from '../../Layout/Wizard/components/Progress';
+import WizardSteps from '../../Layout/Wizard/components/WizardSteps';
+import Wizard from '../../Layout/Wizard/Wizard';
 import useUser from '../../requests/queries/useUser';
 import { IAddress } from '../../types';
 import BillingAddressStep from './components/BillingAddressStep';

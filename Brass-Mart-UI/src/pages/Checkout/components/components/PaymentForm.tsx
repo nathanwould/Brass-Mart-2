@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Box, Button, Flex } from '@chakra-ui/react';
-import useCheckout, { CHECKOUT_MUTATION } from '../../../../requests/mutations/useCheckout';
+import { CHECKOUT_MUTATION } from '../../../../requests/mutations/useCheckout';
 import { StripeError } from '@stripe/stripe-js';
-import { PrevButton } from '../../../../Layout/Wizard/Wizard';
+import { PrevButton } from '../../../../Layout/Wizard/components/Buttons';
 import { useNavigate } from 'react-router-dom';
 import useUser from '../../../../requests/queries/useUser';
 import { useMutation } from 'react-query';

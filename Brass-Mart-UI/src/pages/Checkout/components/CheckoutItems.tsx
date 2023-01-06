@@ -2,10 +2,10 @@
 
 import { Text, Heading, Grid, GridItem } from '@chakra-ui/react';
 import CartItem from '../../../Layout/Cart/components/CartItem';
+import { NextButton } from '../../../Layout/Wizard/components/Buttons';
 import { ICartItem, IUser } from '../../../types';
 import calcTotalPrice from '../../../utils/calcTotalPrice';
 import { formatMoney } from '../../../utils/formatMoney';
-import { NextButton } from '../../../Layout/Wizard/Wizard';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
 
 interface Props {

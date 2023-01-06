@@ -1,8 +1,7 @@
-import { Flex, Button, Text, HStack } from '@chakra-ui/react';
-import React from 'react'
+import { Button, Text, HStack } from '@chakra-ui/react';
 import usePagination from '../../requests/queries/usePagination';
 
-type Props = {
+interface Props {
   filter: any;
   page: number;
   setPage: any;
@@ -30,7 +29,7 @@ function Pagination({
         isLoading={isLoading}
         onClick={() => {
           setPage(page - 1)
-          setSkip((prevState: any) => prevState - take)
+          setSkip((prevSkip: number) => prevSkip - take)
         }}
         disabled={page === 1}
       >
@@ -41,7 +40,7 @@ function Pagination({
         isLoading={isLoading}
         onClick={() => {
           setPage(page + 1)
-          setSkip((prevState: any) => prevState + take)
+          setSkip((prevSkip: number) => prevSkip + take)
         }}
         disabled={count <= take * page}
       >

@@ -1,7 +1,7 @@
 import { Slide, StackDivider, VStack } from '@chakra-ui/react';
 import { MotionStyle } from 'framer-motion';
 import React from 'react'
-import { useWizardContext } from '../../../../Layout/Wizard/Wizard';
+import { useWizardContext } from '../../../../Layout/Wizard/components/WizardContext';
 
 interface Props { 
   children: React.ReactNode;

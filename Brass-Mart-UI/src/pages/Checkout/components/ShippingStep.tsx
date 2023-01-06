@@ -1,12 +1,10 @@
 import { Flex, Heading, FormControl, FormLabel, Input, Select, FormHelperText, Grid, GridItem } from '@chakra-ui/react';
-import { NextButton, PrevButton } from '../../../Layout/Wizard/Wizard';
+import { PrevButton, NextButton } from '../../../Layout/Wizard/components/Buttons';
 import { useCheckoutContext } from '../Checkout';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
 
 function ShippingForm() {
   const { shippingAddress, setShippingAddress } = useCheckoutContext();
-
-  // console.log(form)
   return (
     <CheckoutStepContainer>
       <Heading>Shipping</Heading>

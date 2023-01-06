@@ -1,6 +1,6 @@
 import { Heading, Flex, FormControl, FormLabel, Input, Grid, GridItem, Checkbox } from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
-import { NextButton, PrevButton } from '../../../Layout/Wizard/Wizard';
+import { PrevButton, NextButton } from '../../../Layout/Wizard/components/Buttons';
 import { useCheckoutContext } from '../Checkout';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
 
