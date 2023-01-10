@@ -1,19 +1,14 @@
-import { VStack, Text, HStack, Checkbox } from '@chakra-ui/react';
-import React from 'react'
+import { VStack, Text } from '@chakra-ui/react';
 import FilterSection from './components/FilterSection';
 import { filterCategories } from './filterCategories';
 
 interface Props {
-  filter: any;
   setFilter: (cb: (value: any) => any) => void;
-  initialFilter?: any;
   pageCategory?: string;
 };
 
 export default function Filter({
-  filter,
   setFilter,
-  initialFilter,
   pageCategory
 }: Props) {
   const handleChecked = (checked: boolean, key: string, value: string) => {

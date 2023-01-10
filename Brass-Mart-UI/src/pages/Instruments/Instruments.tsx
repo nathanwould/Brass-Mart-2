@@ -47,9 +47,7 @@ function Instruments() {
       <HStack align="start">
         
       <Filter
-        filter={filter}
         setFilter={setFilter}
-        initialFilter={initialFilter}
         pageCategory={pageCategory}
       />
 

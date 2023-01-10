@@ -16,7 +16,7 @@ function Pagination({
   take,
   setSkip
 }: Props) {
-  const { data, error, isLoading } = usePagination({ filter });
+  const { data, isLoading } = usePagination({ filter });
   const count = data?.productsCount;
   const pageCount = count ? Math.ceil(count / take) : 1;
   return (

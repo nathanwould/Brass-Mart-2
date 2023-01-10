@@ -1,17 +1,20 @@
-import { Stack, Heading, Text, Spinner } from '@chakra-ui/react';
+import { Stack, Heading, Text, Spinner, HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
+import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
 import { IProduct } from '../../types';
 
 function Accessories() {
-  const [filter, setFilter] = useState({ productType: { equals: 'accessory' } });
+  const pageCategory = 'accessory'
+  const initialFilter = { productType: { equals: pageCategory} }
+  const [filter, setFilter] = useState(initialFilter);
   const [take, setTake] = useState(8);
   const [skip, setSkip] = useState(0);
   const [orderBy, setOrderBy] = useState({ createdAt: 'desc' })
   
-  const { data, isLoading, error } = useProducts({
+  const { data, isLoading } = useProducts({
     filter,
     take,
     skip,
@@ -32,24 +35,37 @@ function Accessories() {
 
   return (
     <Stack m={6} spacing={6}>
+
       <BreadCrumbs items={breadcrumbItems} />
+
       <Heading>Accessories</Heading>
-      { isLoading && <Spinner color="blue.400" /> }
-      { !isLoading && products?.length ?
-        <Products
-          products={products}
-          filter={filter}
+
+      <HStack align="start">
+        
+        <Filter
           setFilter={setFilter}
-          take={take}
-          setTake={setTake}
-          skip={skip}
-          setSkip={setSkip}
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
+          pageCategory={pageCategory}
         />
-        :
-        <Text>No accessories found!</Text>
-      }
+        
+        {isLoading && <Spinner color="blue.400" />}
+        
+        { !isLoading && products?.length ?
+          <Products
+            products={products}
+            filter={filter}
+            setFilter={setFilter}
+            take={take}
+            setTake={setTake}
+            skip={skip}
+            setSkip={setSkip}
+            orderBy={orderBy}
+            setOrderBy={setOrderBy}
+          />
+          :
+          <Text>No accessories found!</Text>
+        }
+          
+        </HStack>
     </Stack>
   );
 }

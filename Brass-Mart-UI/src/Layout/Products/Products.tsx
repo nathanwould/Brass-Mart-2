@@ -4,28 +4,23 @@ import { IProduct } from '../../types';
 import Pagination from '../Pagination/Pagination';
 import ProductCard from './components/ProductCard';
 
-type Props = {
+interface Props {
   products: IProduct[];
   filter: any;
-  setFilter: (value: any) => void;
-  skip: number;
+  setFilter?: (value: any) => void;
+  skip?: number;
   setSkip: (value: number) => void;
   take: number;
-  setTake: (value: number) => void;
-  orderBy: any;
-  setOrderBy: (value: any) => void;
+  setTake?: (value: number) => void;
+  orderBy?: any;
+  setOrderBy?: (value: any) => void;
 }
 
 function Products({
   products,
   filter,
-  setFilter,
-  skip,
   setSkip,
   take,
-  setTake,
-  orderBy,
-  setOrderBy,
 }: Props) {
   const [page, setPage] = useState(1);
   return (
