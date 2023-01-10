@@ -1,5 +1,5 @@
-import { Stack, Heading, Text, Spinner } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Stack, Heading, Text, Spinner, HStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
@@ -33,6 +33,10 @@ function Instruments() {
     },
   ];
 
+  useEffect(() => {
+    console.log(filter)
+  }, [filter]);
+
   return (
     <Stack m={6} spacing={6}>
 
@@ -40,8 +44,11 @@ function Instruments() {
 
       <Heading>Instruments</Heading>
       
+      <HStack align="start">
+        
       <Filter
         filter={filter}
+        setFilter={setFilter}
         initialFilter={initialFilter}
         pageCategory={pageCategory}
       />
@@ -63,6 +70,7 @@ function Instruments() {
         :
         <Text>No instruments found!</Text>
       }
+      </HStack>
 
     </Stack>
   );

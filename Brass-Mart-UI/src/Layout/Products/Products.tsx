@@ -1,4 +1,4 @@
-import { Wrap } from '@chakra-ui/react';
+import { Stack, Wrap } from '@chakra-ui/react';
 import { useState } from 'react'
 import { IProduct } from '../../types';
 import Pagination from '../Pagination/Pagination';
@@ -29,8 +29,8 @@ function Products({
 }: Props) {
   const [page, setPage] = useState(1);
   return (
-    <>
-      <Wrap spacing={6} p={6}>
+    <Stack paddingX={6}>
+      <Wrap spacing={6}>
         {products && products.map((product: IProduct) => {
           const { id, name, photos, price } = product;
           return (
@@ -51,7 +51,7 @@ function Products({
         take={take}
         setSkip={setSkip}
       />
-    </>
+    </Stack>
   );
 }
 

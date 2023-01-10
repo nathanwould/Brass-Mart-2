@@ -30,7 +30,7 @@ export const filterCategories = {
     },
     {
       title: "Maker",
-      value: "maker",
+      value: "make",
       items: [
         { label: "Conn", value: 'Conn' },
         { label: "Bach", value: 'Bach' },
@@ -41,14 +41,18 @@ export const filterCategories = {
   ],
   accessory: [
     {
-      category: [
+      title: 'Category',
+      value: 'category',
+      items: [
         { label: 'Mouthpiece', value: 'mouthpiece' },
         { label: 'Case', value: 'case' },
         { label: 'Maintenance', value: 'maintenance' },
       ]
     },
     {
-      maker: [
+      title: 'Maker',
+      value: 'make',
+      items: [
         { label: 'Hetman', value: 'Hetman' },
         { label: "Marcus Bonna", value: 'Marcus Bonna'}
       ]

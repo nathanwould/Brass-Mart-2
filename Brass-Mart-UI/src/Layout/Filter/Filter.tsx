@@ -5,20 +5,62 @@ import { filterCategories } from './filterCategories';
 
 interface Props {
   filter: any;
+  setFilter: (cb: (value: any) => any) => void;
   initialFilter?: any;
   pageCategory?: string;
 };
 
-export default function Filter({ filter, initialFilter, pageCategory }: Props) {
-  // console.log(filter)
-  // console.log(filterCategories)
+export default function Filter({
+  filter,
+  setFilter,
+  initialFilter,
+  pageCategory
+}: Props) {
+  const handleChecked = (checked: boolean, key: string, value: string) => {
+  
+    if (checked) {
+      console.log("Adding filter!")
+      let newFilter = { [key]: { in: [value] } }
+      setFilter(prevFilter => {
+        if (prevFilter[key]) {
+          let newValues = prevFilter[key].in
+          newValues.push(value)
+          console.log("prevValues:", prevFilter[key].in)
+          // console.log('newValues:', newValues)
+          let newFilter = { [key]: { in: newValues } }
+          return {...prevFilter, ...newFilter}
+        } 
+        else return { ...prevFilter, ...newFilter }
+      })
+    }
+    if (!checked) {
+      console.log("Removing filter!")
+      setFilter(prevFilter => {
+        let filterValues = prevFilter[key].in
+        if (filterValues.includes(value) && filterValues.length > 1) {
+          let newValues = filterValues.filter((item: any) => item !== value)
+          let newFilter = { [key]: { in: newValues } }
+          return {...prevFilter, ...newFilter}
+        } else {
+          const { [key]: deletedKey, ...otherKeys } = prevFilter
+          return otherKeys;
+        }
+      })
+    }
+  };
+
   if (pageCategory === 'instrument') {
     return (
       <VStack align="left">
         <Text fontWeight="bold" size="5xl">Filters</Text>
 
         {filterCategories.instrument.map(category => (
-            <FilterSection title={category.title} items={category.items} />
+          <FilterSection
+            category={category.value}
+            title={category.title}
+            items={category.items}
+            handleChecked={handleChecked}
+          />
         ))}
 
       </VStack>
@@ -29,7 +71,14 @@ export default function Filter({ filter, initialFilter, pageCategory }: Props) {
     return (
       <VStack align="left">
         <Text>Filters</Text>
-        { }
+        {filterCategories.accessory.map(category => (
+          <FilterSection
+            category={category.value}
+            title={category.title}
+            items={category.items}
+            handleChecked={handleChecked}
+          />
+        ))}
       </VStack>
     );
   }

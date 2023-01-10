@@ -3,17 +3,27 @@ import React from 'react'
 import { IFilterItem } from '../filterCategories';
 
 interface Props {
+  category: string;
   title: string;
   items: IFilterItem[];
+  handleChecked: (checked: any, key: string, value: string) => void;
 };
 
-function FilterSection({title, items}: Props) {
+function FilterSection({
+  category,
+  title,
+  items,
+  handleChecked }: Props) {
   return (
     <VStack align="left">
       <Text fontWeight="bold">{title}</Text>
           {items.map(item => (
-            <HStack>
-              <Checkbox>{item.label}</Checkbox>
+            <HStack key={item.label}>
+              <Checkbox
+                onChange={(e) => handleChecked(e.target.checked, category, item.value)}
+              >
+                {item.label}
+              </Checkbox>
             </HStack>
           ))}
         </VStack>
