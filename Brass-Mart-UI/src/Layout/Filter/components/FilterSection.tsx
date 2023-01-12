@@ -17,8 +17,8 @@ function FilterSection({
   return (
     <VStack align="left">
       <Text fontWeight="bold">{title}</Text>
-          {items.map(item => (
-            <HStack key={item.label}>
+          {items.map((item, index) => (
+            <HStack key={index}>
               <Checkbox
                 onChange={(e) => handleChecked(e.target.checked, category, item.value)}
               >
@@ -30,4 +30,4 @@ function FilterSection({
   )
 }
 
-export default FilterSection
+export default FilterSection;

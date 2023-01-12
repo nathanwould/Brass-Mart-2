@@ -1,4 +1,4 @@
-import { VStack, Text } from '@chakra-ui/react';
+import { VStack, Text, Heading } from '@chakra-ui/react';
 import FilterSection from './components/FilterSection';
 import { filterCategories } from './filterCategories';
 
@@ -15,18 +15,18 @@ export default function Filter({
   
     if (checked) {
       console.log("Adding filter!")
-      let newFilter = { [key]: { in: [value] } }
       setFilter(prevFilter => {
         if (prevFilter[key]) {
           let newValues = prevFilter[key].in
           newValues.push(value)
-          console.log("prevValues:", prevFilter[key].in)
-          // console.log('newValues:', newValues)
           let newFilter = { [key]: { in: newValues } }
-          return {...prevFilter, ...newFilter}
-        } 
-        else return { ...prevFilter, ...newFilter }
-      })
+          return { ...prevFilter, ...newFilter }
+        }
+        else {
+          let newFilter = { [key]: { in: [value] } }
+          return { ...prevFilter, ...newFilter }
+        }
+      });
     }
     if (!checked) {
       console.log("Removing filter!")
@@ -46,11 +46,12 @@ export default function Filter({
 
   if (pageCategory === 'instrument') {
     return (
-      <VStack align="left">
-        <Text fontWeight="bold" size="5xl">Filters</Text>
+      <VStack align="left" marginRight={6}>
+        <Heading fontWeight="bold" size="lg">Filters</Heading>
 
-        {filterCategories.instrument.map(category => (
+        {filterCategories.instrument.map((category, index) => (
           <FilterSection
+            key={index}
             category={category.value}
             title={category.title}
             items={category.items}
@@ -65,7 +66,7 @@ export default function Filter({
   if (pageCategory === 'accessory') {
     return (
       <VStack align="left">
-        <Text>Filters</Text>
+        <Heading fontWeight="bold" size="lg">Filters</Heading>
         {filterCategories.accessory.map(category => (
           <FilterSection
             category={category.value}
