@@ -7,7 +7,7 @@ import Testimonial from "./components/Testimonial";
 type Props = {}
 
 function Home({ }: Props) {
-  const { data, isLoading, error, isSuccess } = useProducts({
+  const { data, isLoading, error } = useProducts({
     filter: { productType: { equals: 'instrument'} },
     take: 8,
     skip: 0,
@@ -15,7 +15,7 @@ function Home({ }: Props) {
   });
   return (
     <Stack spacing={12} paddingBottom={12}>
-      {isSuccess && <ProductCarousel products={data?.products} />}
+      <ProductCarousel products={data?.products} />
       <Feature />
       <Testimonial
         quote={"Please don't enter real credit card information! Use the test card provided in the checkout."}

@@ -51,9 +51,26 @@ function Instruments() {
         pageCategory={pageCategory}
       />
 
-      {isLoading && <Spinner color="blue.400" />}
+        {isLoading
+          ?
+          <Spinner color="blue.400" />
+            : products.length ?
+              <Products
+                products={products}
+                filter={filter}
+                setFilter={setFilter}
+                take={take}
+                setTake={setTake}
+                skip={skip}
+                setSkip={setSkip}
+                orderBy={orderBy}
+                setOrderBy={setOrderBy}
+              />
+            :
+            <Text>No instruments found!</Text>
+        }
       
-      { !isLoading && products?.length ?
+      {/* { !isLoading && products?.length ?
         <Products
           products={products}
           filter={filter}
@@ -67,7 +84,7 @@ function Instruments() {
         />
         :
         <Text>No instruments found!</Text>
-      }
+      } */}
       </HStack>
 
     </Stack>

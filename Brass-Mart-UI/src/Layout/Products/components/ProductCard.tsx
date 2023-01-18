@@ -29,6 +29,7 @@ function ProductCard({ id, title, photo, price }: Props) {
           <Image
             src={photo?.image.publicUrlTransformed}
             alt={photo?.alt}
+            loading="lazy"
             objectFit="cover"
             style={{
               aspectRatio: "4 / 3"

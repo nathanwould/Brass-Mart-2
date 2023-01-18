@@ -5,7 +5,7 @@ import { formatMoney } from "../../utils/formatMoney";
 import { LeftArrow, RightArrow } from "./components/Arrows";
 
 interface Props {
-  products: IProduct[];
+  products?: IProduct[];
 };
 
 function ProductCarousel({ products }: Props) {
@@ -44,13 +44,14 @@ function ProductCarousel({ products }: Props) {
           lg: "30rem",
         }}
       >  
+        {products ?
         <Slider {...settings}>
           {products?.map((product, index) => {
             const { id, name, price } = product;
             const image = product.photos[0].image.publicUrlTransformed;
             return (
               <VStack
-                key={id}
+                key={index}
                 shadow="md"
                 textAlign="center"
                 paddingBottom={4}
@@ -59,6 +60,7 @@ function ProductCarousel({ products }: Props) {
                 <Image
                   src={image}
                   alt={product.name}
+                  loading="lazy"
                 />
                 <Text fontWeight="bold" fontSize="xl">{name}</Text>
                 <Text fontWeight="bold">{formatMoney(price)}</Text>
@@ -66,7 +68,18 @@ function ProductCarousel({ products }: Props) {
               </VStack>
             )
           })}
-        </Slider>
+          </Slider>
+          :
+          <VStack
+            shadow="md"
+            textAlign="center"
+            paddingBottom={4}
+            spacing={4}
+          >
+            <Box backgroundColor="gray.200"></Box>
+            <Box backgroundColor="gray.200" width="100%"></Box>
+          </VStack>
+        }
       </Box>
 
       <Button
