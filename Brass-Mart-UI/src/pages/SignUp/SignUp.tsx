@@ -62,6 +62,7 @@ function SignUp() {
 
   return (
     <Center p={6}>
+
       <Box
         minW={{ base: 'lg', md: 'md'}}
         borderWidth='1px'
@@ -70,12 +71,16 @@ function SignUp() {
         marginTop={6}
         boxShadow='lg'
       >
+
         <Stack spacing={4}>
+
           <Center>
             <Heading size='lg'>Sign Up</Heading>
           </Center>
+
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
+
               <FormControl isRequired={true}>
                 <FormLabel>Name</FormLabel>
                 <Input
@@ -86,6 +91,7 @@ function SignUp() {
                   onChange={(e) => setForm({...form, name: e.target.value})}
                 />
               </FormControl>
+
               <FormControl isRequired={true}>
                 <FormLabel>Email</FormLabel>
                 <Input
@@ -96,6 +102,7 @@ function SignUp() {
                   onChange={(e) => setForm({...form, email: e.target.value})}
                 />
               </FormControl>
+
               <FormControl isRequired={true}>
                 <FormLabel>Password</FormLabel>
                 <Input
@@ -107,7 +114,9 @@ function SignUp() {
                 />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
               </FormControl>
+
               {error && <Text color="red">Login failed - please try again</Text>}
+
               <Button
                 type="submit"
                 isLoading={isLoading}
@@ -115,10 +124,14 @@ function SignUp() {
               >
                 Sign Up
               </Button>
+
             </Stack>
           </form>
+
         </Stack>
+
       </Box>
+      
     </Center>
   )
 }

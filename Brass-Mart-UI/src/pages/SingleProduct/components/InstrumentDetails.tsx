@@ -22,19 +22,28 @@ function InstrumentDetails({ product }: Props) {
         minW="14rem"
       >
         <SimpleGrid columns={2} spacing={2} marginBottom={6}>
+
           <Text fontWeight="bold">Maker:</Text>
           <Text>{make}</Text>
+
           <Text fontWeight="bold">Model:</Text>
           <Text>{model}</Text>
+
           <Text fontWeight="bold">Bore Size:</Text>
           <Text>{boreSize}"</Text>
+
           <Text fontWeight="bold">Bell Size:</Text>
           <Text>{bellSize}"</Text>
+
           <Text fontWeight="bold">Price:</Text>
           <Text fontWeight="bold">{formatMoney(price)}</Text>
+
         </SimpleGrid>
+
         <Spacer />
+
         <AddToCartButton id={id} />
+        
       </Flex>
     );
   } else {

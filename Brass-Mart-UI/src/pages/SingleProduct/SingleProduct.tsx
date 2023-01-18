@@ -18,9 +18,13 @@ function SingleProduct() {
       m={6}
       spacing={6}
     > 
+      
       <BreadCrumbs items={breadCrumbItems} />
+
       <Heading>{product?.name}</Heading>
-      <ProductDetails product={product}/>
+
+      <ProductDetails product={product} />
+      
     </Stack>
   );
 }

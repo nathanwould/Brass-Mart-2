@@ -1,11 +1,48 @@
-import React from 'react'
+import { Flex, SimpleGrid, Text, Spacer, Box } from '@chakra-ui/react';
+import AddToCartButton from '../../../Layout/Cart/components/AddToCartButton';
+import { IProduct } from '../../../types';
+import { formatMoney } from '../../../utils/formatMoney';
 
-interface Props {};
+interface Props {
+  product: IProduct;
+};
 
-function AccessoryDetails({}: Props) {
-  return (
-    <div>AccessoryDetails</div>
-  );
+function AccessoryDetails({product}: Props) {
+  const { id, make, model, price } = product;
+  
+  if (product) {
+    return (
+      <Flex
+        direction="column"
+        color="black"
+        backgroundColor="white"
+        borderRadius="md"
+        m={7}
+        p={4}
+        minW="14rem"
+      >
+        <SimpleGrid columns={2} spacing={2} marginBottom={6}>
+
+          <Text fontWeight="bold">Maker:</Text>
+          <Text>{make}</Text>
+
+          <Text fontWeight="bold">Model:</Text>
+          <Text>{model}</Text>
+
+          <Text fontWeight="bold">Price:</Text>
+          <Text fontWeight="bold">{formatMoney(price)}</Text>
+
+        </SimpleGrid>
+
+        <Spacer />
+
+        <AddToCartButton id={id} />
+        
+      </Flex>
+    );
+  } else {
+    return <Box>Not Found!</Box>
+  }
 }
 
 export default AccessoryDetails;

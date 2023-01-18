@@ -58,12 +58,16 @@ function SignInForm() {
       marginTop={6}
       boxShadow='lg'
     >
+
       <Stack spacing={4}>
+
         <Center>
           <Heading size='lg'>Sign In</Heading>
         </Center>
+
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
+            
               <FormControl isRequired={true}>
                 <FormLabel>Email</FormLabel>
                 <Input
@@ -74,6 +78,7 @@ function SignInForm() {
                   onChange={(e) => setForm({...form, email: e.target.value})}
                 />
               </FormControl>
+            
               <FormControl isRequired={true}>
                 <FormLabel>Password</FormLabel>
                 <Input
@@ -85,7 +90,9 @@ function SignInForm() {
                 />
                 {/* <FormHelperText>Must be at least 8 characters, contain a number, capital letter, and 1 special character.</FormHelperText> */}
             </FormControl>
+
             {error && <Text color="red">Login failed - please try</Text>}
+
             <Button
               type="submit"
               isLoading={isLoading}
@@ -93,9 +100,12 @@ function SignInForm() {
             >
               Sign In
             </Button>
+
             </Stack>
         </form>
+
       </Stack>
+      
     </Box>
   )
 }

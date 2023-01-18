@@ -2,6 +2,7 @@ import { Box, Flex, VStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import ImageCarousel from '../../../Layout/Carousel/ImageCarousel';
 import { IProduct } from '../../../types'
+import AccessoryDetails from './AccessoryDetails';
 import InstrumentDetails from './InstrumentDetails';
 
 interface Props {
@@ -15,12 +16,17 @@ function ProductDetails({product}: Props) {
       backgroundColor="gray.200"
       borderRadius="md"
     >
+
       <Flex direction={{ base: "column", md: "row" }} >
+
         <ImageCarousel photos={product?.photos} />
+
         {product?.productType === "instrument" &&
-          <InstrumentDetails product={product} />
-        }
+          <InstrumentDetails product={product} />}
+        {product?.productType === "accessory" &&
+          <AccessoryDetails product={product} />}
       </Flex>
+
       <VStack
         backgroundColor="white"
         borderRadius="md"
@@ -33,6 +39,7 @@ function ProductDetails({product}: Props) {
         <Text fontWeight="bold" >Description:</Text>
         <Text>{product?.description}</Text>
       </VStack>
+
     </Box>
   )
 }

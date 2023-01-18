@@ -46,10 +46,10 @@ function Instruments() {
       
       <HStack align="start">
         
-      <Filter
-        setFilter={setFilter}
-        pageCategory={pageCategory}
-      />
+        <Filter
+          setFilter={setFilter}
+          pageCategory={pageCategory}
+        />
 
         {isLoading
           ?
@@ -69,22 +69,6 @@ function Instruments() {
             :
             <Text>No instruments found!</Text>
         }
-      
-      {/* { !isLoading && products?.length ?
-        <Products
-          products={products}
-          filter={filter}
-          setFilter={setFilter}
-          take={take}
-          setTake={setTake}
-          skip={skip}
-          setSkip={setSkip}
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
-        />
-        :
-        <Text>No instruments found!</Text>
-      } */}
       </HStack>
 
     </Stack>
