@@ -45,29 +45,35 @@ function ProductCarousel({ products }: Props) {
         }}
       >  
         {products ?
-        <Slider {...settings}>
-          {products?.map((product, index) => {
-            const { id, name, price } = product;
-            const image = product.photos[0].image.publicUrlTransformed;
-            return (
-              <VStack
-                key={index}
-                shadow="md"
-                textAlign="center"
-                paddingBottom={4}
-                spacing={4}
-              >
-                <Image
-                  src={image}
-                  alt={product.name}
-                  loading="lazy"
-                />
-                <Text fontWeight="bold" fontSize="xl">{name}</Text>
-                <Text fontWeight="bold">{formatMoney(price)}</Text>
-                <Button as="a" href={`products/${id}`}>Learn More</Button>
-              </VStack>
-            )
-          })}
+          <Slider {...settings}>
+            {products?.map((product, index) => {
+              const { id, name, price } = product;
+              const image = product.photos[0].image.publicUrlTransformed;
+              return (
+                <VStack
+                  key={index}
+                  shadow="md"
+                  textAlign="center"
+                  marginY={4}
+                  paddingBottom={4}
+                  spacing={4}
+                >
+
+                  <Image
+                    src={image}
+                    alt={product.name}
+                    loading="lazy"
+                  />
+
+                  <Text fontWeight="bold" fontSize="xl">{name}</Text>
+
+                  <Text fontWeight="bold">{formatMoney(price)}</Text>
+
+                  <Button as="a" href={`products/${id}`}>Learn More</Button>
+
+                </VStack>
+              )
+            })}
           </Slider>
           :
           <VStack
@@ -94,6 +100,7 @@ function ProductCarousel({ products }: Props) {
       >
         Shop Instruments
       </Button>
+
     </VStack>
   );
 }

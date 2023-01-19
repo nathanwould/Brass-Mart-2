@@ -25,7 +25,8 @@ function Products({
   const [page, setPage] = useState(1);
   return (
     <Stack paddingX={6}>
-      <Wrap spacing={6}>
+
+      <Wrap spacing={6} paddingBottom={2}>
         {products && products.map((product: IProduct) => {
           const { id, name, photos, price } = product;
           return (
@@ -39,6 +40,7 @@ function Products({
           )
         })}
       </Wrap>
+
       <Pagination
         filter={filter}
         page={page}
@@ -46,6 +48,7 @@ function Products({
         take={take}
         setSkip={setSkip}
       />
+      
     </Stack>
   );
 }

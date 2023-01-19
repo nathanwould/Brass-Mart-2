@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Image, VStack, LinkOverlay, Spacer } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, VStack, Spacer } from '@chakra-ui/react';
 import { formatMoney } from '../../../utils/formatMoney';
 import AddToCartButton from '../../Cart/components/AddToCartButton';
 
@@ -21,6 +21,7 @@ function ProductCard({ id, title, photo, price }: Props) {
         transform: "scale(1.01)"
       }}
     >
+
       <Box
         as="a"
         href={`/products/${id}`}
@@ -37,15 +38,21 @@ function ProductCard({ id, title, photo, price }: Props) {
           />
         }
       </Box>
+
       <Spacer />
+
       <VStack
         p={4}
         spacing={3}
         align="left"
       >
+
         <Heading fontSize="xl">{title}</Heading>
+
         <Text fontWeight="bold">{formatMoney(price)}</Text>
-        <AddToCartButton id={id}/>
+
+        <AddToCartButton id={id} />
+        
       </VStack>
     </Box>
   );

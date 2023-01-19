@@ -25,6 +25,7 @@ function ProductDetails({product}: Props) {
           <InstrumentDetails product={product} />}
         {product?.productType === "accessory" &&
           <AccessoryDetails product={product} />}
+          
       </Flex>
 
       <VStack
