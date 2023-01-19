@@ -4,10 +4,8 @@ import useProducts from "../../requests/queries/useProducts";
 import Feature from "./components/Feature";
 import Testimonial from "./components/Testimonial";
 
-type Props = {}
-
-function Home({ }: Props) {
-  const { data, isLoading, error } = useProducts({
+function Home() {
+  const { data } = useProducts({
     filter: { productType: { equals: 'instrument'} },
     take: 8,
     skip: 0,
@@ -24,7 +22,7 @@ function Home({ }: Props) {
         quote={"Please don't enter real credit card information! Use the test card provided in the checkout."}
         author={"Nathan Wood, Site Administrator"}
       />
-      
+
     </Stack>
   )
 }

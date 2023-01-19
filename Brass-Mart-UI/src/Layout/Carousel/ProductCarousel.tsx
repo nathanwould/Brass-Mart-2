@@ -30,10 +30,12 @@ function ProductCarousel({ products }: Props) {
       spacing={4}
       p={8}
     >
+
       <Box textAlign="center">
         <Heading size="lg">NEW ARRIVALS</Heading>
         <Text m={2}>Grab them before they're gone!</Text>
       </Box>
+      
       <Box
         p={4}
         paddingBottom={8}
