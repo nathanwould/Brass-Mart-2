@@ -73,3 +73,11 @@ export type IBreadcrumbItem = {
   name: string;
   href: string;
 };
+
+export type IFilter = {
+  [key: string]: { [key: string]: string }
+}
+
+export type IOrderBy = {
+  [key: string]: string
+};

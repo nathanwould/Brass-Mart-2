@@ -1,8 +1,9 @@
 import { Button, Text, HStack } from '@chakra-ui/react';
 import usePagination from '../../requests/queries/usePagination';
+import { IFilter } from '../../types';
 
 interface Props {
-  filter: any;
+  filter: IFilter;
   page: number;
   setPage: any;
   take: number;
@@ -28,7 +29,7 @@ function Pagination({
       <Button
         isLoading={isLoading}
         onClick={() => {
-          setPage(page - 1)
+          setPage((prevPage: number) => prevPage - 1)
           setSkip((prevSkip: number) => prevSkip - take)
         }}
         disabled={page === 1}
@@ -39,7 +40,7 @@ function Pagination({
       <Button
         isLoading={isLoading}
         onClick={() => {
-          setPage(page + 1)
+          setPage((prevPage: number) => prevPage + 1)
           setSkip((prevSkip: number) => prevSkip + take)
         }}
         disabled={count <= take * page}

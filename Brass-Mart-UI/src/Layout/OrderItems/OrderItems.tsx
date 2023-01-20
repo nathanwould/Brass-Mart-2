@@ -8,7 +8,6 @@ interface Props {
 }
 
 function OrderItems({ order }: Props) {
-  console.log(order);
   const items = order?.items;
   return (
     <VStack
@@ -21,15 +20,19 @@ function OrderItems({ order }: Props) {
       fontWeight="bold"
       alignItems="flex-start"
     >
+
       <Heading size="lg" textAlign="left">Your Order:</Heading>
+
       {items && 
         items.map((item: IOrderItem) => (
           <OrderItem item={item} />
         ))
       }
+
       <Box display="flex" w="100%" textAlign="right">
         <Text w="100%" >Total: {formatMoney(order.total)}</Text>
       </Box>
+
     </VStack>
   );
 }

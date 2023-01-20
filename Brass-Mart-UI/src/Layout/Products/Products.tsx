@@ -1,19 +1,19 @@
 import { Stack, Wrap } from '@chakra-ui/react';
-import { useState } from 'react'
-import { IProduct } from '../../types';
+import { useState } from 'react';
+import { IFilter, IOrderBy, IProduct } from '../../types';
 import Pagination from '../Pagination/Pagination';
 import ProductCard from './components/ProductCard';
 
 interface Props {
   products: IProduct[];
-  filter: any;
-  setFilter?: (value: any) => void;
+  filter: IFilter;
+  setFilter?: (value: IFilter) => void;
   skip?: number;
   setSkip: (value: number) => void;
   take: number;
   setTake?: (value: number) => void;
-  orderBy?: any;
-  setOrderBy?: (value: any) => void;
+  orderBy?: IOrderBy;
+  setOrderBy?: (value: IOrderBy) => void;
 }
 
 function Products({
@@ -48,7 +48,7 @@ function Products({
         take={take}
         setSkip={setSkip}
       />
-      
+
     </Stack>
   );
 }

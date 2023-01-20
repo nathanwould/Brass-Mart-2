@@ -1,4 +1,4 @@
-import { VStack, Text, Heading } from '@chakra-ui/react';
+import { VStack, Heading } from '@chakra-ui/react';
 import FilterSection from './components/FilterSection';
 import { filterCategories } from './filterCategories';
 

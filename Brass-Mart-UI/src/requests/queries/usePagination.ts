@@ -1,6 +1,7 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
 import useRequest from "../../API/request";
+import { IFilter } from "./useProducts";
 
 const PAGINATION_QUERY = gql`
   query ($filter: ProductWhereInput) {
@@ -9,7 +10,7 @@ const PAGINATION_QUERY = gql`
 `;
 
 interface UsePaginationOptions {
-  filter?: any;
+  filter?: IFilter;
 };
 
 const getPaginationComposer =

@@ -15,7 +15,7 @@ export const useWizardProgress = () => {
 };
 
 export default function Progress({ stepItems }: ProgressProps) {
-  const { currentStep, steps } = useWizardProgress();
+  const { currentStep } = useWizardProgress();
   return (
     <Flex
       marginTop={6}
@@ -46,7 +46,7 @@ export default function Progress({ stepItems }: ProgressProps) {
             <Text color={index >= currentStep ? "gray.600" : "green.500"}>{item}</Text>
           </Box>
       ))}
-      
+
     </Flex>
   )
 };

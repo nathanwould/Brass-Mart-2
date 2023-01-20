@@ -4,15 +4,15 @@ import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
-import { IProduct } from '../../types';
+import { IFilter, IOrderBy, IProduct } from '../../types';
 
 function Accessories() {
   const pageCategory = 'accessory'
   const initialFilter = { productType: { equals: pageCategory} }
-  const [filter, setFilter] = useState(initialFilter);
+  const [filter, setFilter] = useState<IFilter>(initialFilter);
   const [take, setTake] = useState(8);
   const [skip, setSkip] = useState(0);
-  const [orderBy, setOrderBy] = useState({ createdAt: 'desc' })
+  const [orderBy, setOrderBy] = useState<IOrderBy>({ createdAt: 'desc' })
   
   const { data, isLoading } = useProducts({
     filter,
@@ -20,6 +20,7 @@ function Accessories() {
     skip,
     orderBy,
   });
+
   const products: IProduct[] = data?.products;
 
   const breadcrumbItems = [
@@ -65,7 +66,8 @@ function Accessories() {
           <Text>No accessories found!</Text>
         }
           
-        </HStack>
+      </HStack>
+      
     </Stack>
   );
 }

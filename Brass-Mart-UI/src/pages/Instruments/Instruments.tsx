@@ -1,18 +1,18 @@
 import { Stack, Heading, Text, Spinner, HStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
 import useProducts from '../../requests/queries/useProducts'
-import { IProduct } from '../../types';
+import { IFilter, IOrderBy, IProduct } from '../../types';
 
 function Instruments() {
-  const pageCategory = 'instrument'
-  const initialFilter = { productType: { equals: pageCategory} }
-  const [filter, setFilter] = useState(initialFilter);
+  const pageCategory = 'instrument';
+  const initialFilter = { productType: { equals: pageCategory } };
+  const [filter, setFilter] = useState<IFilter>(initialFilter);
   const [take, setTake] = useState(8);
   const [skip, setSkip] = useState(0);
-  const [orderBy, setOrderBy] = useState({ createdAt: 'desc' })
+  const [orderBy, setOrderBy] = useState<IOrderBy>({ createdAt: 'desc' });
   
   const { data, isLoading } = useProducts({
     filter,
@@ -32,10 +32,6 @@ function Instruments() {
       href: "/instruments",
     },
   ];
-
-  useEffect(() => {
-    console.log(filter)
-  }, [filter]);
 
   return (
     <Stack m={6} spacing={6}>

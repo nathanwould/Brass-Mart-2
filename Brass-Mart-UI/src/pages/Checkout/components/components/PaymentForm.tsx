@@ -20,7 +20,6 @@ interface Props {
 function PaymentForm({
   isLoading,
   setIsLoading,
-  error,
   setError
 }: Props) {
   const { shippingAddress, billingAddress } = useCheckoutContext();

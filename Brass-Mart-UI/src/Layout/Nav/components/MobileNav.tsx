@@ -9,10 +9,11 @@ import {
   Collapse,
   Link
 } from "@chakra-ui/react";
+import { IUser } from "../../../types";
 import { NavItem, NAV_ITEMS, MOBILE_ONLY_NAV_ITEMS, SIGNED_IN_NAV_ITEMS } from "./NavItems";
 
 interface Props {
-  user: any;
+  user: IUser;
 }
 
 const MobileNav = ({user}: Props) => {
