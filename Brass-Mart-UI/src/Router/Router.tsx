@@ -12,18 +12,7 @@ import Account from '../pages/Account/Account';
 import SignUp from '../pages/SignUp/SignUp';
 import Accessories from '../pages/Accessories/Accessories';
 
-// interface RouteProps {
-//   [x: string]: any,
-//   component: ComponentType<object>;
-// };
-
-// interface Props {
-//   [x: string]: any;
-//   children: React.ReactNode
-// };
-
 function Router() {
-  const [isScreen] = useMediaQuery('screen');
   return (
     <BrowserRouter>
       <ApiProvider>

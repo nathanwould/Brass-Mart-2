@@ -39,7 +39,6 @@ function Products({
             />
           )
         })}
-      </Wrap>
 
       <Pagination
         filter={filter}
@@ -47,7 +46,9 @@ function Products({
         setPage={setPage}
         take={take}
         setSkip={setSkip}
-      />
+        />
+        
+      </Wrap>
 
     </Stack>
   );

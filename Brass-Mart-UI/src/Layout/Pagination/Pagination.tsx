@@ -23,6 +23,7 @@ function Pagination({
   return (
     <HStack
       spacing={4}
+      flexGrow={1}
       alignItems="center"
       justifyContent="center"
     >
