@@ -1,6 +1,4 @@
-import { SimpleGrid, Text, VStack, Image, Box, Stack, HStack, Spacer } from '@chakra-ui/react';
-import { orderBy } from 'lodash';
-import React from 'react'
+import { Text, Image, Stack, HStack, Spacer } from '@chakra-ui/react';
 import { IOrderItem, IProduct } from '../../../types';
 import { formatMoney } from '../../../utils/formatMoney';
 
@@ -10,6 +8,7 @@ interface Props {
 
 function OrderItem({ item }: Props) {
   const { name, price, photos, id } = item?.product;
+  console.log(photos[0].image.publicUrlTransformed)
   return (
     <HStack
       key={id}

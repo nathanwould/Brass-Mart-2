@@ -8,6 +8,7 @@ interface Props {
 }
 
 function OrderItems({ order }: Props) {
+  console.log(order)
   const items = order?.items;
   return (
     <VStack
@@ -24,8 +25,8 @@ function OrderItems({ order }: Props) {
       <Heading size="lg" textAlign="left">Your Order:</Heading>
 
       {items && 
-        items.map((item: IOrderItem) => (
-          <OrderItem item={item} />
+        items.map((item: IOrderItem, index) => (
+          <OrderItem key={index} item={item} />
         ))
       }
 

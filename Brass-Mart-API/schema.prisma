@@ -13,12 +13,13 @@ generator client {
 }
 
 model User {
-  id       String     @id @default(cuid())
-  name     String     @default("")
-  email    String     @unique @default("")
-  password String?
-  cart     CartItem[] @relation("CartItem_user")
-  orders   Order[]    @relation("Order_user")
+  id        String     @id @default(cuid())
+  name      String     @default("")
+  email     String     @unique @default("")
+  password  String?
+  cart      CartItem[] @relation("CartItem_user")
+  orders    Order[]    @relation("Order_user")
+  addresses Address[]  @relation("Address_user")
 }
 
 model Product {
@@ -95,6 +96,8 @@ model OrderItem {
 
 model Address {
   id                String  @id @default(cuid())
+  user              User?   @relation("Address_user", fields: [userId], references: [id])
+  userId            String? @map("user")
   name              String  @default("")
   street            String  @default("")
   street2           String  @default("")
@@ -104,4 +107,6 @@ model Address {
   country           String  @default("")
   from_Order_shipTo Order[] @relation("Order_shipTo")
   from_Order_billTo Order[] @relation("Order_billTo")
+
+  @@index([userId])
 }

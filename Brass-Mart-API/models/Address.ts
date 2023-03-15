@@ -1,10 +1,13 @@
 import { list } from "@keystone-6/core";
-import { text } from "@keystone-6/core/fields";
+import { relationship, text } from "@keystone-6/core/fields";
 import { allowAll } from '@keystone-6/core/access';
 
 export const Address = list({
   access: allowAll,
   fields: {
+    user: relationship({
+      ref: 'User.addresses',
+    }),
     name: text({
       validation: { isRequired: true },
     }),

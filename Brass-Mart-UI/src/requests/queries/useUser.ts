@@ -28,6 +28,17 @@ const CURRENT_USER_QUERY = gql`
           id
           total
           charge
+          user {
+            id
+          }
+        }
+        addresses {
+          name
+          street
+          street2
+          city
+          state
+          zipCode
         }
       }
     }

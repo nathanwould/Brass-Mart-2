@@ -60,6 +60,8 @@ type User {
   cartCount(where: CartItemWhereInput! = {}): Int
   orders(where: OrderWhereInput! = {}, orderBy: [OrderOrderByInput!]! = [], take: Int, skip: Int! = 0): [Order!]
   ordersCount(where: OrderWhereInput! = {}): Int
+  addresses(where: AddressWhereInput! = {}, orderBy: [AddressOrderByInput!]! = [], take: Int, skip: Int! = 0): [Address!]
+  addressesCount(where: AddressWhereInput! = {}): Int
 }
 
 type PasswordState {
@@ -81,6 +83,7 @@ input UserWhereInput {
   password: PasswordFilter
   cart: CartItemManyRelationFilter
   orders: OrderManyRelationFilter
+  addresses: AddressManyRelationFilter
 }
 
 input IDFilter {
@@ -144,6 +147,12 @@ input OrderManyRelationFilter {
   none: OrderWhereInput
 }
 
+input AddressManyRelationFilter {
+  every: AddressWhereInput
+  some: AddressWhereInput
+  none: AddressWhereInput
+}
+
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -161,6 +170,7 @@ input UserUpdateInput {
   password: String
   cart: CartItemRelateToManyForUpdateInput
   orders: OrderRelateToManyForUpdateInput
+  addresses: AddressRelateToManyForUpdateInput
 }
 
 input CartItemRelateToManyForUpdateInput {
@@ -177,6 +187,13 @@ input OrderRelateToManyForUpdateInput {
   connect: [OrderWhereUniqueInput!]
 }
 
+input AddressRelateToManyForUpdateInput {
+  disconnect: [AddressWhereUniqueInput!]
+  set: [AddressWhereUniqueInput!]
+  create: [AddressCreateInput!]
+  connect: [AddressWhereUniqueInput!]
+}
+
 input UserUpdateArgs {
   where: UserWhereUniqueInput!
   data: UserUpdateInput!
@@ -188,6 +205,7 @@ input UserCreateInput {
   password: String
   cart: CartItemRelateToManyForCreateInput
   orders: OrderRelateToManyForCreateInput
+  addresses: AddressRelateToManyForCreateInput
 }
 
 input CartItemRelateToManyForCreateInput {
@@ -198,6 +216,11 @@ input CartItemRelateToManyForCreateInput {
 input OrderRelateToManyForCreateInput {
   create: [OrderCreateInput!]
   connect: [OrderWhereUniqueInput!]
+}
+
+input AddressRelateToManyForCreateInput {
+  create: [AddressCreateInput!]
+  connect: [AddressWhereUniqueInput!]
 }
 
 type Product {
@@ -698,6 +721,7 @@ input OrderRelateToOneForCreateInput {
 
 type Address {
   id: ID!
+  user: User
   name: String
   street: String
   street2: String
@@ -716,6 +740,7 @@ input AddressWhereInput {
   OR: [AddressWhereInput!]
   NOT: [AddressWhereInput!]
   id: IDFilter
+  user: UserWhereInput
   name: StringFilter
   street: StringFilter
   street2: StringFilter
@@ -737,6 +762,7 @@ input AddressOrderByInput {
 }
 
 input AddressUpdateInput {
+  user: UserRelateToOneForUpdateInput
   name: String
   street: String
   street2: String
@@ -752,6 +778,7 @@ input AddressUpdateArgs {
 }
 
 input AddressCreateInput {
+  user: UserRelateToOneForCreateInput
   name: String
   street: String
   street2: String

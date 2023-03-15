@@ -1,6 +1,7 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
 import useRequest from "../../API/request";
+import { IFilter, IOrderBy } from "../../types";
 
 const ALL_PRODUCTS_QUERY = gql`
   query GetProducts(
@@ -34,13 +35,13 @@ const ALL_PRODUCTS_QUERY = gql`
   }
 `;
 
-export type IFilter = Object;
+// export type IFilter = Object;
 
 interface UseProductsOptions {
-  filter?: any;
+  filter?: IFilter;
   skip?: number;
   take?: number;
-  orderBy?: any;
+  orderBy?: IOrderBy;
 };
 
 const getProductsComposer =

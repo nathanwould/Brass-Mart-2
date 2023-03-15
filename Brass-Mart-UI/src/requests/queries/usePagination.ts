@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
 import useRequest from "../../API/request";
-import { IFilter } from "./useProducts";
+import { IFilter } from "../../types";
 
 const PAGINATION_QUERY = gql`
   query ($filter: ProductWhereInput) {

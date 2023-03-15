@@ -38,6 +38,10 @@ export const User = list({
       ref: 'Order.user',
       many: true,
     }),
+    addresses: relationship({
+      ref: 'Address.user',
+      many: true,
+    })
     // role: relationship({
     //   ref: 'Role.assignedTo',
     //   access: {

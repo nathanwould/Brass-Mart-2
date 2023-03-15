@@ -1,10 +1,11 @@
-import { Box, Heading, Stack } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import Orders from '../../Layout/Orders/Orders';
 import useUser from '../../requests/queries/useUser';
+import { IUser } from '../../types';
 
 function Account() {
   const { data, isLoading, isError, error } = useUser();
-  console.log(data?.authenticatedItem)
-
+  const user = data?.authenticatedItem;
   if (isLoading) {
     return (
       <Box m={6}>Finding your account...</Box>
@@ -16,7 +17,7 @@ function Account() {
   };
 
   // if (isError) {
-  //   return <Box m={6}>{error.message}</Box>
+  //   return <Box m={6}>{error}</Box>
   // };
 
   return (
@@ -25,7 +26,16 @@ function Account() {
       marginBottom={12}
       spacing={6}
     >
+
       <Heading>Your Account</Heading>
+
+      {user?.addresses.length && <Heading>Address:</Heading>}
+      
+      {user?.orders.length ?
+        <Orders user={user} />
+        : <Text>You have no previous orders.</Text>
+      }
+
     </Stack>
   );
 }
