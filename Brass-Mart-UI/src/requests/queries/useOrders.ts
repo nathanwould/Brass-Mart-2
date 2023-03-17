@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 import { useQuery } from "react-query";
 import useRequest from "../../API/request";
-import { IFilter, IOrderBy } from "../../types";
+import { IOrderBy } from "../../types";
 
 const ALL_ORDERS_QUERY = gql`
   query GetOrders(
@@ -14,6 +14,7 @@ const ALL_ORDERS_QUERY = gql`
       ) {
         id
         total
+        createdAt
         items {
           id
           product {

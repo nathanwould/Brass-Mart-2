@@ -1,5 +1,4 @@
 import { Heading } from '@chakra-ui/react';
-import React from 'react'
 import useOrders from '../../requests/queries/useOrders';
 import { IOrder, IUser } from '../../types';
 import OrderItems from '../OrderItems/OrderItems';
@@ -10,7 +9,7 @@ type Props = {
 
 function Orders({ user }: Props) {
   const { id } = user;
-  const { data, isLoading, isError } = useOrders({
+  const { data } = useOrders({
     filter: { user: { id: { equals: id } } }
   })
   const orders = data?.orders

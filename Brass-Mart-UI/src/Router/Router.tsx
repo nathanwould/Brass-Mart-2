@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useMediaQuery } from "@chakra-ui/react";
 import ApiProvider from "../API/ApiProvider";
 import Home from "../pages/Home/Home";
 import Layout from "../Layout/Layout/Layout";

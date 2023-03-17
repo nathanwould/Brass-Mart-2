@@ -1,12 +1,11 @@
-import { Box, Heading, Link, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Box, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 import OrderItems from '../../Layout/OrderItems/OrderItems';
 import useOrder from '../../requests/queries/useOrder';
 
 function ThankYou() {
   const { id } = useParams();
-  const { data, isLoading, error } = useOrder({ id });
+  const { data, isLoading } = useOrder({ id });
   const order = data?.order;
 
   if (!order && isLoading) {

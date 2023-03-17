@@ -1,5 +1,4 @@
 import { Button } from '@chakra-ui/react';
-import { ICartItem } from '../../../types';
 
 interface Props {
   id: string;

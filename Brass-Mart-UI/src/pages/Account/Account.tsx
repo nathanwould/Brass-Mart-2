@@ -1,10 +1,9 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react';
 import Orders from '../../Layout/Orders/Orders';
 import useUser from '../../requests/queries/useUser';
-import { IUser } from '../../types';
 
 function Account() {
-  const { data, isLoading, isError, error } = useUser();
+  const { data, isLoading } = useUser();
   const user = data?.authenticatedItem;
   if (isLoading) {
     return (

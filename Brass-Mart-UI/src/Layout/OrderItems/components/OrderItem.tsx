@@ -1,5 +1,5 @@
 import { Text, Image, Stack, HStack, Spacer } from '@chakra-ui/react';
-import { IOrderItem, IProduct } from '../../../types';
+import { IOrderItem } from '../../../types';
 import { formatMoney } from '../../../utils/formatMoney';
 
 interface Props {

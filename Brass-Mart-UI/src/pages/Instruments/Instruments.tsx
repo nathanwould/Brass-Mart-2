@@ -1,5 +1,5 @@
 import { Stack, Heading, Text, Spinner, HStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import BreadCrumbs from '../../Layout/BreadCrumbs/BreadCrumbs';
 import Filter from '../../Layout/Filter/Filter';
 import Products from '../../Layout/Products/Products';
@@ -20,7 +20,8 @@ function Instruments() {
     skip,
     orderBy,
   });
-  const products: IProduct[] = data?.products;
+  
+  const products: IProduct[] = useMemo(() => data?.products, [data]);
   
   const breadcrumbItems = [
     {
