@@ -2,62 +2,56 @@ import { Flex, Heading, FormControl, FormLabel, Input, Select, FormHelperText, G
 import { PrevButton, NextButton } from '../../../Layout/Wizard/components/Buttons';
 import { useCheckoutContext } from '../Checkout';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
+import FormItem from './components/FormItem';
 
 function ShippingForm() {
   const { shippingAddress, setShippingAddress } = useCheckoutContext();
   return (
     <CheckoutStepContainer>
       <Heading>Shipping</Heading>
-      <FormControl isRequired>
-        <FormLabel>Name</FormLabel>
-        <Input
-          value={shippingAddress.name}
-          onChange={(e) => setShippingAddress({ ...shippingAddress, name: e.target.value })}
-        />
-      </FormControl>
-      <FormControl isRequired>
-        <FormLabel>Street</FormLabel>
-        <Input
-          value={shippingAddress.street}
-          onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value })}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Street #2</FormLabel>
-        <Input
+      <FormItem
+        name="Name"
+        value={shippingAddress.name}
+        onChange={(e) => setShippingAddress({ ...shippingAddress, name: e.target.value})}
+        isRequired={true}
+      />
+      <FormItem
+        name="Street"
+        value={shippingAddress.street}
+        onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value})}
+        isRequired={true}
+      />
+      <FormItem
+          name="Street #2"
           value={shippingAddress.street2}
-          onChange={(e) => setShippingAddress({ ...shippingAddress, street2: e.target.value })}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, street2: e.target.value})}
         />
-      </FormControl>
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
         <GridItem colSpan={2}>
-          <FormControl isRequired>
-            <FormLabel>City</FormLabel>
-            <Input 
-              value={shippingAddress.city}
-              onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
-            />
-          </FormControl>
+        <FormItem
+          name="City"
+          value={shippingAddress.city}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value})}
+          isRequired={true}
+        />
         </GridItem>
         <GridItem colSpan={1}>
-          <FormControl isRequired>
-            <FormLabel>State</FormLabel>
-            <Input
-              value={shippingAddress.state}
-              onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
-            />
-          </FormControl>
+        <FormItem
+          name="State"
+          value={shippingAddress.state}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value})}
+          isRequired={true}
+        />
         </GridItem>
       </Grid>
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
         <GridItem colSpan={1}>
-          <FormControl isRequired>
-            <FormLabel>Zip</FormLabel>
-            <Input
-              value={shippingAddress.zipCode}
-              onChange={(e) => setShippingAddress({ ...shippingAddress, zipCode: e.target.value })}
-            />
-          </FormControl>
+        <FormItem
+          name="Zip Code"
+          value={shippingAddress.zipCode}
+          onChange={(e) => setShippingAddress({ ...shippingAddress, zipCode: e.target.value})}
+          isRequired={true}
+        />
         </GridItem>
         <GridItem colSpan={2}>
           <FormControl isRequired>
