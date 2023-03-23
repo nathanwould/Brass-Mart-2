@@ -1,15 +1,25 @@
 import { Heading, Flex, FormControl, FormLabel, Input, Grid, GridItem, Checkbox } from '@chakra-ui/react';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { PrevButton, NextButton } from '../../../Layout/Wizard/components/Buttons';
-import { useCheckoutContext } from '../Checkout';
+import {
+  useBillingAddress,
+  useSetBillingAddress,
+  useSetUseShipping,
+  useShippingAddress,
+  useUseShipping
+} from '../CheckoutContext';
 import CheckoutStepContainer from './components/CheckoutStepContainer';
+import FormItem from './components/FormItem';
 
 function BillingAddressStep() {
-  const [checked, setChecked] = useState(false);
-  const { billingAddress, setBillingAddress, shippingAddress } = useCheckoutContext();
+  const shippingAddress = useShippingAddress()
+  const billingAddress = useBillingAddress()
+  const setBillingAddress = useSetBillingAddress()
+  const useShipping = useUseShipping()
+  const setUseShipping = useSetUseShipping()
 
   useEffect(() => {
-    !!checked ?
+    !!useShipping ?
       setBillingAddress(shippingAddress)
       : setBillingAddress({
         name: '',
@@ -20,7 +30,7 @@ function BillingAddressStep() {
         zipCode: '',
         country: 'USA',
       })
-  }, [checked, shippingAddress, setBillingAddress]);
+  }, [useShipping, shippingAddress, setBillingAddress]);
 
   return (
     <CheckoutStepContainer>
@@ -28,57 +38,61 @@ function BillingAddressStep() {
       <Flex justifyContent="space-between">
         <Heading size="lg">Billing Address</Heading>
         <Checkbox
-          isChecked={checked}
-          onChange={() => setChecked(!checked)}
+          isChecked={useShipping}
+          onChange={() => setUseShipping(!useShipping)}
         >
           Use Shipping Address
         </Checkbox>
       </Flex>
-      <FormControl isRequired>
-        <FormLabel>Name</FormLabel>
-        <Input
-          value={billingAddress.name}
-          onChange={(e) => setBillingAddress({ ...billingAddress, name: e.target.value })}
+      <FormItem
+        name="Name"
+        value={billingAddress?.name}
+        onChange={(e) => setBillingAddress({ ...billingAddress, name: e.target.value})}
+        isRequired={true}
+      />
+      <FormItem
+        name="Street"
+        value={billingAddress?.street}
+        onChange={(e) => setBillingAddress({ ...billingAddress, street: e.target.value})}
+        isRequired={true}
+      />
+      <FormItem
+          name="Street #2"
+          value={billingAddress?.street2}
+          onChange={(e) => setBillingAddress({ ...billingAddress, street2: e.target.value})}
         />
-      </FormControl>
-      <FormControl isRequired>
-        <FormLabel>Street</FormLabel>
-        <Input
-          value={billingAddress.street}
-          onChange={(e) => setBillingAddress({ ...billingAddress, street: e.target.value })}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Street #2</FormLabel>
-        <Input
-          value={billingAddress.street2}
-          onChange={(e) => setBillingAddress({ ...billingAddress, street2: e.target.value })}
-        />
-      </FormControl>
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
         <GridItem colSpan={2}>
-          <FormControl isRequired>
-            <FormLabel>City</FormLabel>
-            <Input 
-              value={billingAddress.city}
-              onChange={(e) => setBillingAddress({ ...billingAddress, city: e.target.value })}
-            />
-          </FormControl>
+        <FormItem
+          name="City"
+          value={billingAddress?.city}
+          onChange={(e) => setBillingAddress({ ...billingAddress, city: e.target.value})}
+          isRequired={true}
+        />
         </GridItem>
         <GridItem colSpan={1}>
-          <FormControl isRequired>
-            <FormLabel>State</FormLabel>
-            <Input
-              value={billingAddress.state}
-              onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
-            />
-          </FormControl>
+        <FormItem
+          name="State"
+          value={billingAddress?.state}
+          onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value})}
+          isRequired={true}
+        />
+        </GridItem>
+      </Grid>
+      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+        <GridItem colSpan={1}>
+        <FormItem
+          name="Zip Code"
+          value={billingAddress?.zipCode}
+          onChange={(e) => setBillingAddress({ ...billingAddress, zipCode: e.target.value})}
+          isRequired={true}
+        />
         </GridItem>
       </Grid>
       <FormControl isRequired>
         <FormLabel>Country</FormLabel>
         <Input
-              value={billingAddress.country}
+              value={billingAddress?.country}
               onChange={(e) => setBillingAddress({ ...billingAddress, country: e.target.value })}
             />
       </FormControl>
