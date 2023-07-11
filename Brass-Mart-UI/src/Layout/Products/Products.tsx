@@ -38,8 +38,9 @@ function Products({
               price={price}
             />
           )
-        })}
-
+        })}  
+      </Wrap>
+      
       <Pagination
         filter={filter}
         page={page}
@@ -47,8 +48,6 @@ function Products({
         take={take}
         setSkip={setSkip}
         />
-        
-      </Wrap>
 
     </Stack>
   );
