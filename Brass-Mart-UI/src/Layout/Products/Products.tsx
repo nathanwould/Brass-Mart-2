@@ -24,7 +24,7 @@ function Products({
 }: Props) {
   const [page, setPage] = useState(1);
   return (
-    <Stack paddingX={6}>
+    <Stack paddingX={6} spacing={4}>
 
       <Wrap spacing={6} paddingBottom={2}>
         {products && products.map((product: IProduct) => {
@@ -40,7 +40,7 @@ function Products({
           )
         })}  
       </Wrap>
-      
+
       <Pagination
         filter={filter}
         page={page}

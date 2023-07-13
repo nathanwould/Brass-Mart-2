@@ -51,7 +51,7 @@ function Instruments() {
         {isLoading
           ?
           <Spinner color="blue.400" />
-            : products.length ?
+            : products?.length ?
               <Products
                 products={products}
                 filter={filter}
