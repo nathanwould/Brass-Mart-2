@@ -4,11 +4,18 @@ import { integer, relationship } from "@keystone-6/core/fields";
 import { permissions } from "../access";
 
 export const CartItem = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: () => true,
+      create: args => permissions.canManageCart(args),
+      update: args => permissions.canManageCart(args),
+      delete: args => permissions.canManageCart(args),
+    }
+  },
   ui: {
     // hide the back end UI from regular users
-    // hideCreate: args => !permissions.canManageUsers(args),
-    // hideDelete: args => !permissions.canManageUsers(args),
+    hideCreate: args => !permissions.canManageUsers(args),
+    hideDelete: args => !permissions.canManageUsers(args),
     listView: {
       initialColumns: ['product', 'quantity', 'user']
     },
