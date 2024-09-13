@@ -4,15 +4,14 @@ import { password, relationship, text } from "@keystone-6/core/fields";
 import { permissions } from "../access";
 
 export const User = list({
-  access: allowAll,
-  // {
-  //   operation: {
-  //     query: ({ session, context }) => true,
-  //     create: ({ session, context }) => true,
-  //     update: ({ session, context }) => true/*args => permissions.canManageUsers(args)*/,
-  //     delete: ({ session, context }) => true/*args => permissions.canManageUsers(args)*/,
-  //   },
-  // },
+  access: {
+    operation: {
+      query: () => true,
+      create: () => true,
+      update: args => permissions.canManageUsers(args),
+      delete: args => permissions.canManageUsers(args),
+    }
+  },
   ui: {
     hideCreate: args => !permissions.canManageUsers(args),
     hideDelete: args => !permissions.canManageUsers(args),
@@ -41,13 +40,13 @@ export const User = list({
     addresses: relationship({
       ref: 'Address.user',
       many: true,
-    })
-    // role: relationship({
-    //   ref: 'Role.assignedTo',
-    //   access: {
-    //     create: permissions.canManageUsers,
-    //     update: permissions.canManageUsers,
-    //   },
-    // }),
+    }),
+    role: relationship({
+      ref: 'Role.assignedTo',
+      access: {
+        create: permissions.canManageUsers,
+        update: permissions.canManageUsers,
+      },
+    }),
   },
 });

@@ -1,9 +1,16 @@
 import { list } from "@keystone-6/core";
-import { allowAll } from "@keystone-6/core/access";
 import { float, integer, relationship, select, text, timestamp } from "@keystone-6/core/fields";
+import { permissions } from "../access";
 
 export const Product = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: ({ session, context, listKey, operation }) => true,
+      create: args => permissions.canManageProducts(args),
+      update: args => permissions.canManageProducts(args),
+      delete: args => permissions.canManageProducts(args),
+    }
+  },
   fields: {
     productType: select({
       options: [
@@ -23,7 +30,8 @@ export const Product = list({
     }),
     model: text({
       // lol this doesn't work, Keystone doesn't support conditional fields like this yet
-      validation: { isRequired: !!{ productType: 'instrument' } }
+      // validation: { isRequired: !!{ productType: 'instrument' } }
+      validation: { isRequired: true },
     }),
     category: select({
       options: [
