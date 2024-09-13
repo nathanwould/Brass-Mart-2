@@ -4,7 +4,14 @@ import { password, relationship, text } from "@keystone-6/core/fields";
 import { permissions } from "../access";
 
 export const User = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: () => true,
+      create: () => true,
+      update: args => permissions.canManageUsers(args),
+      delete: args => permissions.canManageUsers(args),
+    }
+  },
   ui: {
     hideCreate: args => !permissions.canManageUsers(args),
     hideDelete: args => !permissions.canManageUsers(args),
